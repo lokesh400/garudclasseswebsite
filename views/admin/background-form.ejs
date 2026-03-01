@@ -1,0 +1,88 @@
+<%- include('partials/header', { page: 'background', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-fill-drip"></i> <%= bg ? 'Edit' : 'Add' %> Background</h1>
+</div>
+
+<div class="admin-form-card" style="max-width:680px;">
+  <form action="<%= bg ? '/admin/background/' + bg._id + '?_method=PUT' : '/admin/background' %>" method="POST" enctype="multipart/form-data">
+
+    <!-- Section picker (only on new) -->
+    <% if (!bg) { %>
+    <div class="form-group">
+      <label>Page Section <span style="color:var(--primary)">*</span></label>
+      <select name="section" required>
+        <option value="">— Choose section —</option>
+        <% sections.forEach(s => { %>
+          <option value="<%= s.value %>"><%= s.label %></option>
+        <% }) %>
+      </select>
+    </div>
+    <% } else { %>
+    <div class="form-group">
+      <label>Section</label>
+      <input type="text" value="<%= bg.label || bg.section %>" disabled style="background:#f0f0f0;cursor:not-allowed;">
+      <input type="hidden" name="section" value="<%= bg.section %>">
+    </div>
+    <% } %>
+
+    <div class="form-grid-2">
+      <!-- Background Colour -->
+      <div class="form-group">
+        <label>Background Colour</label>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <input type="color" name="bgColor" value="<%= bg ? bg.bgColor : '#f8f9fa' %>" style="width:46px;height:40px;padding:2px;cursor:pointer;">
+          <input type="text" name="bgColorHex" placeholder="#f8f9fa" value="<%= bg ? bg.bgColor : '#f8f9fa' %>" style="flex:1;" id="bgColorHex">
+        </div>
+      </div>
+
+      <!-- Overlay Colour -->
+      <div class="form-group">
+        <label>Overlay Colour</label>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <input type="color" name="overlayColor" value="<%= bg ? bg.overlayColor : '#000000' %>" style="width:46px;height:40px;padding:2px;cursor:pointer;">
+          <input type="text" placeholder="#000000" value="<%= bg ? bg.overlayColor : '#000000' %>" style="flex:1;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Gradient -->
+    <div class="form-group">
+      <label>CSS Gradient <small style="color:var(--text-light);">(leave blank to use solid colour)</small></label>
+      <input type="text" name="gradient" placeholder="e.g. linear-gradient(135deg, #e63946, #1d3557)"
+             value="<%= bg ? bg.gradient : '' %>">
+    </div>
+
+    <!-- Overlay Opacity -->
+    <div class="form-group">
+      <label>Image Overlay Opacity: <strong id="opacityVal"><%= bg ? (bg.overlayOpacity * 100).toFixed(0) : 50 %>%</strong></label>
+      <input type="range" name="overlayOpacity" min="0" max="1" step="0.05"
+             value="<%= bg ? bg.overlayOpacity : 0.5 %>"
+             oninput="document.getElementById('opacityVal').textContent = Math.round(this.value*100)+'%'">
+    </div>
+
+    <!-- Background Image -->
+    <div class="form-group">
+      <label>Background Image <small style="color:var(--text-light);">(optional – upload or paste URL)</small></label>
+      <input type="file" name="imageUrl" accept="image/*">
+      <% if (bg && bg.imageUrl) { %>
+        <img src="<%= bg.imageUrl %>" class="preview-img" alt="current bg">
+        <small style="color:var(--text-light);">Upload a new file to replace the current image.</small>
+      <% } %>
+    </div>
+
+    <!-- Active toggle -->
+    <div class="form-group" style="flex-direction:row;align-items:center;gap:10px;">
+      <input type="checkbox" name="isActive" id="isActive" value="true"
+             <%= (!bg || bg.isActive) ? 'checked' : '' %>>
+      <label for="isActive" style="margin:0;cursor:pointer;">Active (apply this background on the website)</label>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+      <a href="/admin/background" class="btn btn-outline">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

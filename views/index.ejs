@@ -105,16 +105,7 @@
       <% activeBanners.forEach((b, i) => { %>
       <div class="banner-slide" style="background-color:<%= b.bgColor || '#1d3557' %>;">
         <div class="banner-slide-img" style="background-image:url('<%= b.image %>')"></div>
-        <div class="banner-slide-overlay"></div>
-        <div class="banner-slide-content">
-          <div class="banner-text">
-            <h2 class="banner-title"><%= b.title %></h2>
-            <% if (b.subtitle) { %><p class="banner-subtitle"><%= b.subtitle %></p><% } %>
-            <% if (b.buttonText && b.buttonLink) { %>
-              <a href="<%= b.buttonLink %>" class="btn btn-primary btn-banner"><%= b.buttonText %> <i class="fas fa-arrow-right"></i></a>
-            <% } %>
-          </div>
-        </div>
+
       </div>
       <% }) %>
     </div>
@@ -501,7 +492,7 @@
     </div>
     <div class="cta-btns">
       <a href="/contact" class="btn btn-white btn-lg">Enroll Now <i class="fas fa-arrow-right"></i></a>
-      <a href="tel:+91XXXXXXXXXX" class="btn btn-outline-white btn-lg"><i class="fas fa-phone"></i> Call Now</a>
+      <a href="tel:+919896913009" class="btn btn-outline-white btn-lg"><i class="fas fa-phone"></i> Call Now</a>
     </div>
   </div>
 </section>

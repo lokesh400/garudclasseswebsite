@@ -84,7 +84,8 @@ app.get('/robots.txt', (req, res) => {
 app.use((req, res) => {
   res.status(404).render('404', {
     title: 'Page Not Found | Garud Classes',
-    description: 'The page you are looking for does not exist.'
+    description: 'The page you are looking for does not exist.',
+    page: ''
   });
 });
 
@@ -94,6 +95,7 @@ app.use((err, req, res, next) => {
   res.status(500).render('error', {
     title: 'Server Error | Garud Classes',
     description: 'Something went wrong.',
+    page: '',
     error: process.env.NODE_ENV === 'development' ? err : {}
   });
 });

@@ -2,7 +2,7 @@
 <div class="topbar">
   <div class="container topbar-inner">
     <div class="topbar-left">
-      <a href="tel:+91XXXXXXXXXX"><i class="fas fa-phone"></i> +91-XXXXXXXXXX</a>
+      <a href="tel:+919896913009"><i class="fas fa-phone"></i> +91 98969 13009</a>
       <a href="mailto:info@garudclasses.com"><i class="fas fa-envelope"></i> info@garudclasses.com</a>
     </div>
     <div class="topbar-right">
@@ -28,23 +28,23 @@
 
     <!-- Nav Links -->
     <ul class="nav-links" id="navLinks">
-      <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
-      <li><a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a></li>
+      <li><a href="/" class="<%= locals.page === 'home' ? 'active' : '' %>">Home</a></li>
+      <li><a href="/about" class="<%= locals.page === 'about' ? 'active' : '' %>">About</a></li>
       <li class="dropdown">
-        <a href="/courses" class="<%= page === 'courses' ? 'active' : '' %>">Courses <i class="fas fa-chevron-down"></i></a>
+        <a href="/courses" class="<%= locals.page === 'courses' ? 'active' : '' %>">Courses <i class="fas fa-chevron-down"></i></a>
         <ul class="dropdown-menu">
-          <li><a href="/courses#jee"><i class="fas fa-atom"></i> JEE Main & Advanced</a></li>
+          <li><a href="/courses#jee"><i class="fas fa-atom"></i> JEE Main &amp; Advanced</a></li>
           <li><a href="/courses#neet"><i class="fas fa-heartbeat"></i> NEET UG</a></li>
           <li><a href="/courses#foundation"><i class="fas fa-graduation-cap"></i> Foundation (8-10)</a></li>
           <li><a href="/courses#board"><i class="fas fa-book-open"></i> Board Exam</a></li>
           <li><a href="/courses#ntse"><i class="fas fa-star"></i> NTSE / Olympiad</a></li>
         </ul>
       </li>
-      <li><a href="/faculty" class="<%= page === 'faculty' ? 'active' : '' %>">Faculty</a></li>
-      <li><a href="/results" class="<%= page === 'results' ? 'active' : '' %>">Results</a></li>
-      <li><a href="/gallery" class="<%= page === 'gallery' ? 'active' : '' %>">Gallery</a></li>
-      <li><a href="/blog" class="<%= page === 'blog' ? 'active' : '' %>">Blog</a></li>
-      <li><a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a></li>
+      <li><a href="/faculty" class="<%= locals.page === 'faculty' ? 'active' : '' %>">Faculty</a></li>
+      <li><a href="/results" class="<%= locals.page === 'results' ? 'active' : '' %>">Results</a></li>
+      <li><a href="/gallery" class="<%= locals.page === 'gallery' ? 'active' : '' %>">Gallery</a></li>
+      <li><a href="/blog" class="<%= locals.page === 'blog' ? 'active' : '' %>">Blog</a></li>
+      <li><a href="/contact" class="<%= locals.page === 'contact' ? 'active' : '' %>">Contact</a></li>
     </ul>
 
     <!-- CTA -->
