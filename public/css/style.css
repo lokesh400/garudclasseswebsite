@@ -117,9 +117,18 @@ input, textarea, select, button { font-family: var(--font); }
 .navbar.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.15); }
 .nav-inner { display: flex; align-items: center; padding: 14px 20px; gap: 30px; }
 .nav-logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.nav-logo .logo-icon {
-  width: 46px; height: 46px; background: var(--gradient); border-radius: 12px;
-  display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem;
+/* Circular logo image — navbar, footer, admin */
+.logo-img {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--primary);
+  box-shadow: 0 2px 10px rgba(230,57,70,0.25);
+}
+.logo-img-footer {
+  border-color: rgba(255,255,255,0.6);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 .logo-main { display: block; font-size: 1.25rem; font-weight: 900; color: var(--secondary); line-height: 1; letter-spacing: 2px; }
 .logo-sub { display: block; font-size: 0.62rem; font-weight: 600; color: var(--primary); letter-spacing: 4px; }
