@@ -12,6 +12,8 @@ const passport = require('passport');
 const http = require('http');
 const https = require('https');
 const Admin = require('./models/Admin');
+const cors = require('cors');
+const axios = require('axios');
 
 const app = express();
 
@@ -26,7 +28,7 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false
 }));
 app.use(compression());
-
+app.use(cors());
 // ─── View Engine ───────────────────────────────────────────────────────────
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -82,6 +84,11 @@ app.get('/robots.txt', (req, res) => {
   res.send(`User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: ${process.env.SITE_URL}/sitemap.xml`);
 });
 
+// ─── Health Check ──────────────────────────────────────────────────────────
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 // ─── 404 Handler ───────────────────────────────────────────────────────────
 app.use((req, res) => {
   res.status(404).render('404', {
@@ -102,38 +109,18 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.get("/health", (req, res) => {
-  res.status(200).send("OK");
-});
-
-function startKeepAlive() {
-  const url = "https://garudclasses.com";
-  if (!url) {
-    console.warn("⚠️ RENDER_EXTERNAL_URL not set, keep-alive disabled");
-    return;
-  }
-  const isHttps = url.startsWith("https");
-  const client = isHttps ? https : http;
-  const pingUrl = `${url}/health`;
-  setInterval(() => {
-    const req = client.get(pingUrl, (res) => {
-      console.log(`🔄 Keep-alive ping → ${res.statusCode}`);
-      res.resume();
+function startKeepAlive(port) {
+  setInterval(async () => {
+    const result = await axios.get(`http://garudclasses.com/health`, { timeout: 5000 }).catch(err => {
+      console.error('Keep-alive error:', err.message);
+      return null;
     });
-    req.on("error", (err) => {
-      console.error("❌ Keep-alive error:", err.message);
-    });
-    req.setTimeout(5000, () => {
-      console.warn("⏱️ Keep-alive timeout");
-      req.destroy();
-    });
+    if (result) console.log(`🔄 Keep-alive ping → ${result.status} OK`);
   }, 10000);
 }
-
-startKeepAlive();
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Garud Classes running at http://localhost:${PORT}`);
+  startKeepAlive();
 });

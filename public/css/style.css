@@ -98,11 +98,11 @@ input, textarea, select, button { font-family: var(--font); }
 /* ══════════════════════════════════════════════════════════
    TOPBAR
 ══════════════════════════════════════════════════════════ */
-.topbar { background: var(--secondary-dark); color: rgba(255,255,255,0.85); }
-.topbar-inner { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; font-size: 0.82rem; gap: 20px; }
-.topbar-left, .topbar-right { display: flex; align-items: center; gap: 20px; }
+.topbar { background: var(--secondary-dark); color: rgba(255,255,255,0.85); overflow: hidden; }
+.topbar-inner { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; font-size: 0.82rem; gap: 16px; flex-wrap: wrap; }
+.topbar-left, .topbar-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .topbar-left a, .topbar-right a {
-  color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 6px;
+  color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 6px; white-space: nowrap;
 }
 .topbar-left a:hover, .topbar-right a:hover { color: var(--accent); }
 .topbar-right .fab { font-size: 1rem; }
@@ -928,6 +928,12 @@ input, textarea, select, button { font-family: var(--font); }
   .course-detail-grid { grid-template-columns: 1fr; }  
 }
 
+@media (max-width: 900px) {
+  .topbar-left .topbar-email { display: none; }
+  .topbar-inner { gap: 10px; padding: 6px 14px; font-size: 0.78rem; }
+  .topbar-left, .topbar-right { gap: 12px; }
+}
+
 @media (max-width: 768px) {
   .topbar { display: none; }
   .nav-links { 
@@ -939,7 +945,7 @@ input, textarea, select, button { font-family: var(--font); }
   .nav-links.open { right: 0; }
   .nav-links a { padding: 14px 24px; border-radius: 0; border-bottom: 1px solid var(--border); }
   .dropdown-menu { position: static; box-shadow: none; opacity: 1; visibility: visible; transform: none; border: none; border-radius: 0; background: var(--light); }
-  .hamburger { display: flex; }
+  .hamburger { display: flex; margin-left: auto; }
   .btn-enroll { display: none; }
   .section-title { font-size: 1.8rem; }
   .hero-title { font-size: 2.2rem; }
