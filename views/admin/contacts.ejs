@@ -1,0 +1,35 @@
+<%- include('partials/header', { page: 'contacts', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-envelope"></i> Contact Messages</h1>
+  <span class="badge badge-primary"><%= contacts.length %> Total Messages</span>
+</div>
+
+<% if (contacts && contacts.length > 0) { %>
+<div class="table-responsive">
+  <table class="admin-table">
+    <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Subject</th><th>Message</th><th>Date</th><th>Action</th></tr></thead>
+    <tbody>
+      <% contacts.forEach(c => { %>
+      <tr>
+        <td><strong><%= c.name %></strong></td>
+        <td><% if(c.phone){%><a href="tel:<%= c.phone %>"><%= c.phone %></a><%}else{%>-<%}%></td>
+        <td><% if(c.email){%><a href="mailto:<%= c.email %>"><%= c.email %></a><%}else{%>-<%}%></td>
+        <td><%= c.subject || '-' %></td>
+        <td class="msg-preview"><%= c.message?.substring(0,80) %>...</td>
+        <td><%= c.createdAt.toLocaleDateString('en-IN') %></td>
+        <td>
+          <form action="/admin/contacts/<%= c._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete?')">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<% } else { %>
+<div class="empty-admin"><i class="fas fa-envelope"></i><p>No messages yet.</p></div>
+<% } %>
+
+<%- include('partials/footer') %>

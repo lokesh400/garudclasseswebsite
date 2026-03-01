@@ -1,0 +1,509 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+<%- include('partials/flash') %>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO SECTION
+══════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-particles" id="particles"></div>
+  </div>
+  <div class="container hero-content">
+    <div class="hero-text">
+      <div class="hero-badge"><i class="fas fa-award"></i> Trusted by 10,000+ Students</div>
+      <h1 class="hero-title">
+        Achieve Your <span class="text-gradient">Dream Rank</span><br>
+        With Garud Classes
+      </h1>
+      <p class="hero-desc">
+        Premier coaching for <strong>JEE Main & Advanced</strong>, <strong>NEET UG</strong>, 
+        Foundation, Board Exams, NTSE & Olympiads. Expert faculty, proven methodology, outstanding results.
+      </p>
+      <div class="hero-btns">
+        <a href="/courses" class="btn btn-primary">Explore Courses <i class="fas fa-arrow-right"></i></a>
+        <a href="/results" class="btn btn-outline">View Results <i class="fas fa-trophy"></i></a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num" data-target="10000">0</div>
+          <div class="stat-label">Students Coached</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="15">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="500">0</div>
+          <div class="stat-label">IIT / NIT Selections</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-target="800">0</div>
+          <div class="stat-label">NEET Selections</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-card-group">
+        <div class="floating-card card-1">
+          <i class="fas fa-trophy"></i>
+          <div><strong>AIR 1</strong><span>JEE Advanced</span></div>
+        </div>
+        <div class="floating-card card-2">
+          <i class="fas fa-star"></i>
+          <div><strong>720/720</strong><span>NEET Score</span></div>
+        </div>
+        <div class="floating-card card-3">
+          <i class="fas fa-medal"></i>
+          <div><strong>State Topper</strong><span>Board Exams</span></div>
+        </div>
+        <div class="hero-img-wrap">
+          <img src="/img/hero-students.svg" alt="Students studying at Garud Classes" width="500" height="500">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     MARQUEE – ACHIEVEMENTS
+══════════════════════════════════════════════════════════ -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span><i class="fas fa-trophy"></i> 500+ IIT Selections</span>
+    <span><i class="fas fa-heartbeat"></i> 800+ NEET Qualifiers</span>
+    <span><i class="fas fa-star"></i> 15+ Years of Excellence</span>
+    <span><i class="fas fa-medal"></i> State Board Toppers</span>
+    <span><i class="fas fa-users"></i> 10,000+ Students Trained</span>
+    <span><i class="fas fa-award"></i> Best Coaching Institute Award</span>
+    <span><i class="fas fa-trophy"></i> 500+ IIT Selections</span>
+    <span><i class="fas fa-heartbeat"></i> 800+ NEET Qualifiers</span>
+    <span><i class="fas fa-star"></i> 15+ Years of Excellence</span>
+    <span><i class="fas fa-medal"></i> State Board Toppers</span>
+    <span><i class="fas fa-users"></i> 10,000+ Students Trained</span>
+    <span><i class="fas fa-award"></i> Best Coaching Institute Award</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     BANNER SLIDER
+══════════════════════════════════════════════════════════ -->
+<% const activeBanners = (typeof banners !== 'undefined' && banners.length > 0) ? banners : [
+  { title: 'Admissions Open 2025–26', subtitle: 'JEE Main & Advanced | NEET-UG | Foundation Batches', image: '/img/hero-students.svg', buttonText: 'Enroll Now', buttonLink: '/contact', bgColor: '#1d3557' },
+  { title: 'Board Exam Special Batch', subtitle: 'Score 90%+ with our expert faculty — limited seats', image: '/img/hero-students.svg', buttonText: 'View Courses', buttonLink: '/courses', bgColor: '#0d2137' },
+  { title: 'NEET 2025 Crash Course', subtitle: 'Intensive 3-month program starting April 2025', image: '/img/hero-students.svg', buttonText: 'Know More', buttonLink: '/courses', bgColor: '#1a0a2e' }
+]; %>
+
+<section class="banner-slider-section">
+  <div class="banner-slider" id="bannerSlider">
+    <div class="banner-track" id="bannerTrack">
+      <% activeBanners.forEach((b, i) => { %>
+      <div class="banner-slide" style="background-color:<%= b.bgColor || '#1d3557' %>;">
+        <div class="banner-slide-img" style="background-image:url('<%= b.image %>')"></div>
+        <div class="banner-slide-overlay"></div>
+        <div class="banner-slide-content">
+          <div class="banner-text">
+            <h2 class="banner-title"><%= b.title %></h2>
+            <% if (b.subtitle) { %><p class="banner-subtitle"><%= b.subtitle %></p><% } %>
+            <% if (b.buttonText && b.buttonLink) { %>
+              <a href="<%= b.buttonLink %>" class="btn btn-primary btn-banner"><%= b.buttonText %> <i class="fas fa-arrow-right"></i></a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+
+    <!-- Controls -->
+    <button class="banner-prev" id="bannerPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+    <button class="banner-next" id="bannerNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+
+    <!-- Dots -->
+    <div class="banner-dots" id="bannerDots">
+      <% activeBanners.forEach((b, i) => { %>
+      <span class="banner-dot <%= i === 0 ? 'active' : '' %>" data-index="<%= i %>"></span>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     COURSES SECTION
+══════════════════════════════════════════════════════════ -->
+<section class="section courses-section" id="courses">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Our Programs</div>
+      <h2 class="section-title">Courses We <span class="text-gradient">Offer</span></h2>
+      <p class="section-desc">Comprehensive coaching programs designed by expert faculty to help you achieve your goals.</p>
+    </div>
+    <% if (courses && courses.length > 0) { %>
+    <div class="courses-grid">
+      <% courses.forEach((course, i) => { %>
+      <div class="course-card" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+        <div class="course-icon">
+          <i class="<%= course.icon || 'fas fa-book' %>"></i>
+        </div>
+        <div class="course-body">
+          <span class="course-tag"><%= course.category %></span>
+          <h3><%= course.name %></h3>
+          <p><%= course.shortDesc || course.description?.substring(0,100) + '...' %></p>
+          <% if (course.features && course.features.length > 0) { %>
+          <ul class="course-features">
+            <% course.features.slice(0,3).forEach(f => { %>
+            <li><i class="fas fa-check-circle"></i> <%= f %></li>
+            <% }) %>
+          </ul>
+          <% } %>
+        </div>
+        <div class="course-footer">
+          <% if (course.duration) { %><span><i class="fas fa-clock"></i> <%= course.duration %></span><% } %>
+          <a href="/courses/<%= course.slug %>" class="btn btn-sm btn-primary">Know More</a>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <!-- Default course cards when DB is empty -->
+    <div class="courses-grid">
+      <div class="course-card">
+        <div class="course-icon course-icon-jee"><i class="fas fa-atom"></i></div>
+        <div class="course-body">
+          <span class="course-tag">JEE</span>
+          <h3>JEE Main & Advanced</h3>
+          <p>Comprehensive preparation for IIT-JEE with Physics, Chemistry & Mathematics from expert IITian faculty.</p>
+          <ul class="course-features">
+            <li><i class="fas fa-check-circle"></i> Daily Practice Problems</li>
+            <li><i class="fas fa-check-circle"></i> Mock Test Series</li>
+            <li><i class="fas fa-check-circle"></i> Doubt Clearing Sessions</li>
+          </ul>
+        </div>
+        <div class="course-footer">
+          <span><i class="fas fa-clock"></i> 2 Years</span>
+          <a href="/courses" class="btn btn-sm btn-primary">Know More</a>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-icon course-icon-neet"><i class="fas fa-heartbeat"></i></div>
+        <div class="course-body">
+          <span class="course-tag">NEET</span>
+          <h3>NEET UG</h3>
+          <p>Complete NEET preparation covering Physics, Chemistry & Biology with experienced medical faculty.</p>
+          <ul class="course-features">
+            <li><i class="fas fa-check-circle"></i> NCERT-Based Teaching</li>
+            <li><i class="fas fa-check-circle"></i> Weekly Mock Tests</li>
+            <li><i class="fas fa-check-circle"></i> Biology Special Batches</li>
+          </ul>
+        </div>
+        <div class="course-footer">
+          <span><i class="fas fa-clock"></i> 2 Years</span>
+          <a href="/courses" class="btn btn-sm btn-primary">Know More</a>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-icon course-icon-foundation"><i class="fas fa-graduation-cap"></i></div>
+        <div class="course-body">
+          <span class="course-tag">FOUNDATION</span>
+          <h3>Foundation (Class 8-10)</h3>
+          <p>Build a strong foundation from early classes to prepare for competitive exams and board exams.</p>
+          <ul class="course-features">
+            <li><i class="fas fa-check-circle"></i> Concept-based Learning</li>
+            <li><i class="fas fa-check-circle"></i> NTSE Preparation</li>
+            <li><i class="fas fa-check-circle"></i> Olympiad Training</li>
+          </ul>
+        </div>
+        <div class="course-footer">
+          <span><i class="fas fa-clock"></i> 1-3 Years</span>
+          <a href="/courses" class="btn btn-sm btn-primary">Know More</a>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-icon course-icon-board"><i class="fas fa-book-open"></i></div>
+        <div class="course-body">
+          <span class="course-tag">BOARD</span>
+          <h3>Board Exam Preparation</h3>
+          <p>Score 95%+ in CBSE/State Board exams with structured study material and regular tests.</p>
+          <ul class="course-features">
+            <li><i class="fas fa-check-circle"></i> Sample Papers</li>
+            <li><i class="fas fa-check-circle"></i> Previous Year Questions</li>
+            <li><i class="fas fa-check-circle"></i> One-on-One Mentoring</li>
+          </ul>
+        </div>
+        <div class="course-footer">
+          <span><i class="fas fa-clock"></i> 1 Year</span>
+          <a href="/courses" class="btn btn-sm btn-primary">Know More</a>
+        </div>
+      </div>
+    </div>
+    <% } %>
+    <div class="section-cta">
+      <a href="/courses" class="btn btn-primary btn-lg">View All Courses <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     WHY CHOOSE US
+══════════════════════════════════════════════════════════ -->
+<section class="section why-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Why Garud Classes?</div>
+      <h2 class="section-title">The Garud <span class="text-gradient">Advantage</span></h2>
+      <p class="section-desc">We don't just teach — we transform students into toppers.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+        <h3>Expert Faculty</h3>
+        <p>IITian, NIT & top university alumni with 10+ years of coaching experience.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-microscope"></i></div>
+        <h3>Proven Methodology</h3>
+        <p>Structured curriculum with concept clarity, daily practice, and regular assessments.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-laptop"></i></div>
+        <h3>Smart Classes</h3>
+        <p>Modern infrastructure with digital boards, audio-visual aids, and online resources.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Performance Tracking</h3>
+        <p>Regular tests, detailed analysis reports, and parent-teacher meetings every month.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-book"></i></div>
+        <h3>Study Material</h3>
+        <p>Comprehensive study material, DPPs, and test series designed by experts.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-hands-helping"></i></div>
+        <h3>Personal Mentoring</h3>
+        <p>One-on-one doubt sessions and personal guidance from day one to D-Day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     TOP RESULTS
+══════════════════════════════════════════════════════════ -->
+<section class="section results-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Hall of Fame</div>
+      <h2 class="section-title">Our Star <span class="text-gradient">Performers</span></h2>
+      <p class="section-desc">Celebrating the exceptional achievements of our students across all competitive exams.</p>
+    </div>
+    <% if (topResults && topResults.length > 0) { %>
+    <div class="results-grid">
+      <% topResults.slice(0,6).forEach((r, i) => { %>
+      <div class="result-card" data-aos="zoom-in" data-aos-delay="<%= i * 80 %>">
+        <div class="result-rank-badge"><% if(r.rank) { %><%= r.rank %><% } else { %>Topper<% } %></div>
+        <img src="<%= r.photo || '/img/default-student.png' %>" alt="<%= r.studentName %>" class="result-photo" loading="lazy">
+        <div class="result-info">
+          <h4><%= r.studentName %></h4>
+          <p class="result-exam"><%= r.exam %></p>
+          <% if (r.score) { %><p class="result-score"><i class="fas fa-star"></i> <%= r.score %></p><% } %>
+          <% if (r.percentile) { %><p class="result-percentile"><i class="fas fa-percent"></i> <%= r.percentile %> Percentile</p><% } %>
+        </div>
+        <div class="result-year"><%= r.year %></div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <!-- Sample result cards -->
+    <div class="results-grid">
+      <% const sampleResults = [
+        { name: 'Rahul Sharma', exam: 'JEE Advanced', rank: 'AIR 142', year: '2024' },
+        { name: 'Priya Singh', exam: 'NEET UG', score: '715/720', year: '2024' },
+        { name: 'Amit Verma', exam: 'JEE Mains', percentile: '99.8', year: '2024' },
+        { name: 'Sneha Patel', exam: 'Board Exam', rank: 'State Topper', year: '2024' },
+        { name: 'Rohan Gupta', exam: 'JEE Advanced', rank: 'AIR 287', year: '2023' },
+        { name: 'Ananya Roy', exam: 'NEET UG', score: '710/720', year: '2023' }
+      ] %>
+      <% sampleResults.forEach((r, i) => { %>
+      <div class="result-card" data-aos="zoom-in" data-aos-delay="<%= i * 80 %>">
+        <div class="result-rank-badge"><%= r.rank || r.score || r.percentile + '%ile' %></div>
+        <img src="/img/default-student.png" alt="<%= r.name %>" class="result-photo" loading="lazy">
+        <div class="result-info">
+          <h4><%= r.name %></h4>
+          <p class="result-exam"><%= r.exam %></p>
+          <% if (r.score) { %><p class="result-score"><i class="fas fa-star"></i> <%= r.score %></p><% } %>
+          <% if (r.percentile) { %><p class="result-percentile"><i class="fas fa-percent"></i> <%= r.percentile %> Percentile</p><% } %>
+        </div>
+        <div class="result-year"><%= r.year %></div>
+      </div>
+      <% }) %>
+    </div>
+    <% } %>
+    <div class="section-cta">
+      <a href="/results" class="btn btn-primary btn-lg">See All Results <i class="fas fa-trophy"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FACULTY SECTION
+══════════════════════════════════════════════════════════ -->
+<section class="section faculty-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Meet the Experts</div>
+      <h2 class="section-title">Our <span class="text-gradient">Faculty</span></h2>
+      <p class="section-desc">Learn from the best — experienced educators who are passionate about student success.</p>
+    </div>
+    <% if (faculties && faculties.length > 0) { %>
+    <div class="faculty-grid">
+      <% faculties.slice(0,8).forEach((f, i) => { %>
+      <div class="faculty-card" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+        <div class="faculty-photo-wrap">
+          <img src="<%= f.photo || '/img/default-faculty.png' %>" alt="<%= f.name %>" class="faculty-photo" loading="lazy">
+          <div class="faculty-overlay">
+            <p><%= f.about?.substring(0,120) || 'Dedicated educator with years of experience in competitive exam preparation.' %>...</p>
+          </div>
+        </div>
+        <div class="faculty-info">
+          <h4><%= f.name %></h4>
+          <p class="faculty-design"><%= f.designation %></p>
+          <span class="faculty-subject"><i class="fas fa-flask"></i> <%= f.subject %></span>
+          <span class="faculty-exp"><i class="fas fa-clock"></i> <%= f.experience || 'Expert' %></span>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <div class="faculty-grid">
+      <% const sampleFaculty = [
+        { name: 'Dr. Rajesh Kumar', designation: 'HOD Physics', subject: 'Physics', exp: '15 Years', qual: 'IIT Delhi' },
+        { name: 'Prof. Sunita Sharma', designation: 'Senior Faculty', subject: 'Chemistry', exp: '12 Years', qual: 'IIT Bombay' },
+        { name: 'Mr. Arun Malhotra', designation: 'Mathematics Expert', subject: 'Mathematics', exp: '10 Years', qual: 'IIT Kanpur' },
+        { name: 'Dr. Priya Gupta', designation: 'Biology Faculty', subject: 'Biology', exp: '8 Years', qual: 'AIIMS Alumni' }
+      ] %>
+      <% sampleFaculty.forEach((f, i) => { %>
+      <div class="faculty-card" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+        <div class="faculty-photo-wrap">
+          <img src="/img/default-faculty.png" alt="<%= f.name %>" class="faculty-photo" loading="lazy">
+          <div class="faculty-overlay">
+            <p>Expert educator from <%= f.qual %> with <%= f.exp %> of teaching experience in competitive exams.</p>
+          </div>
+        </div>
+        <div class="faculty-info">
+          <h4><%= f.name %></h4>
+          <p class="faculty-design"><%= f.designation %></p>
+          <span class="faculty-subject"><i class="fas fa-flask"></i> <%= f.subject %></span>
+          <span class="faculty-exp"><i class="fas fa-clock"></i> <%= f.exp %></span>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } %>
+    <div class="section-cta">
+      <a href="/faculty" class="btn btn-primary btn-lg">Meet All Faculty <i class="fas fa-users"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════════════════════ -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Success Stories</div>
+      <h2 class="section-title">What Our <span class="text-gradient">Students Say</span></h2>
+      <p class="section-desc">Real stories from real achievers who trusted Garud Classes.</p>
+    </div>
+    <div class="testimonials-slider" id="testimonialSlider">
+      <div class="testimonials-track" id="testimonialTrack">
+        <% const testimonials = [
+          { name: 'Rahul Sharma', exam: 'IIT Bombay (AIR 142)', text: "Garud Classes transformed my preparation completely. The faculty here is exceptionally skilled and the study material is world-class. I couldn't have cracked JEE without them.", stars: 5 },
+          { name: 'Priya Singh', exam: 'AIIMS Delhi (NEET 715/720)', text: "The Biology faculty here is the best I've ever seen. Their teaching methodology, regular tests, and personal attention to each student is what makes Garud Classes special.", stars: 5 },
+          { name: 'Sneha Patel', exam: '12th Board State Topper', text: "I scored 98.8% in boards and the credit goes entirely to the Garud Classes team. The faculty motivated me every single day and the mock tests were incredibly helpful.", stars: 5 },
+          { name: 'Amit Verma', exam: 'IIT Roorkee (AIR 312)', text: "Two years at Garud Classes were the best investment of my life. The structured approach, doubt-clearing sessions, and mentoring helped me grow beyond my expectations.", stars: 5 },
+          { name: 'Ananya Roy', exam: 'NEET UG 710/720', text: "From day one, the faculty at Garud Classes made sure I understood every concept deeply. Their dedication and commitment to student success is unmatched.", stars: 5 },
+          { name: 'Karan Mishra', exam: 'NTSE Scholar + IIT Delhi', text: "I joined Garud Classes in class 8 for foundation and it became the foundation of my success. The nurturing environment helped me crack both NTSE and JEE Advanced.", stars: 5 }
+        ] %>
+        <% testimonials.forEach(t => { %>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <% for(let i=0;i<t.stars;i++) { %><i class="fas fa-star"></i><% } %>
+          </div>
+          <p class="testimonial-text">"<%= t.text %>"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar"><%= t.name.charAt(0) %></div>
+            <div>
+              <strong><%= t.name %></strong>
+              <span><%= t.exam %></span>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <div class="slider-controls">
+        <button class="slider-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+        <div class="slider-dots" id="sliderDots"></div>
+        <button class="slider-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     LATEST BLOG
+══════════════════════════════════════════════════════════ -->
+<% if (blogs && blogs.length > 0) { %>
+<section class="section blog-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Latest Updates</div>
+      <h2 class="section-title">From Our <span class="text-gradient">Blog</span></h2>
+      <p class="section-desc">Study tips, exam strategies, and important updates from the Garud Classes team.</p>
+    </div>
+    <div class="blog-grid">
+      <% blogs.forEach((b, i) => { %>
+      <div class="blog-card" data-aos="fade-up" data-aos-delay="<%= i * 100 %>">
+        <div class="blog-img">
+          <img src="<%= b.image || '/img/blog-default.jpg' %>" alt="<%= b.title %>" loading="lazy">
+          <span class="blog-cat"><%= b.category %></span>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta"><i class="fas fa-calendar"></i> <%= b.publishedAt?.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }) %></div>
+          <h3><a href="/blog/<%= b.slug %>"><%= b.title %></a></h3>
+          <p><%= b.excerpt || b.content?.substring(0,120) + '...' %></p>
+          <a href="/blog/<%= b.slug %>" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <div class="section-cta">
+      <a href="/blog" class="btn btn-primary btn-lg">Read All Articles <i class="fas fa-newspaper"></i></a>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ══════════════════════════════════════════════════════════
+     CTA BANNER
+══════════════════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container cta-inner">
+    <div class="cta-text">
+      <h2>Ready to Begin Your <span>Success Journey?</span></h2>
+      <p>Admissions are open for 2025-26. Limited seats available. Register today!</p>
+    </div>
+    <div class="cta-btns">
+      <a href="/contact" class="btn btn-white btn-lg">Enroll Now <i class="fas fa-arrow-right"></i></a>
+      <a href="tel:+91XXXXXXXXXX" class="btn btn-outline-white btn-lg"><i class="fas fa-phone"></i> Call Now</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

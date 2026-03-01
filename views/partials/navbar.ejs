@@ -1,0 +1,58 @@
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-left">
+      <a href="tel:+91XXXXXXXXXX"><i class="fas fa-phone"></i> +91-XXXXXXXXXX</a>
+      <a href="mailto:info@garudclasses.com"><i class="fas fa-envelope"></i> info@garudclasses.com</a>
+    </div>
+    <div class="topbar-right">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navbar -->
+<nav class="navbar" id="mainNav">
+  <div class="container nav-inner">
+    <!-- Logo -->
+    <a href="/" class="nav-logo">
+      <div class="logo-icon"><i class="fas fa-feather-alt"></i></div>
+      <div class="logo-text">
+        <span class="logo-main">GARUD</span>
+        <span class="logo-sub">CLASSES</span>
+      </div>
+    </a>
+
+    <!-- Nav Links -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
+      <li><a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About</a></li>
+      <li class="dropdown">
+        <a href="/courses" class="<%= page === 'courses' ? 'active' : '' %>">Courses <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="/courses#jee"><i class="fas fa-atom"></i> JEE Main & Advanced</a></li>
+          <li><a href="/courses#neet"><i class="fas fa-heartbeat"></i> NEET UG</a></li>
+          <li><a href="/courses#foundation"><i class="fas fa-graduation-cap"></i> Foundation (8-10)</a></li>
+          <li><a href="/courses#board"><i class="fas fa-book-open"></i> Board Exam</a></li>
+          <li><a href="/courses#ntse"><i class="fas fa-star"></i> NTSE / Olympiad</a></li>
+        </ul>
+      </li>
+      <li><a href="/faculty" class="<%= page === 'faculty' ? 'active' : '' %>">Faculty</a></li>
+      <li><a href="/results" class="<%= page === 'results' ? 'active' : '' %>">Results</a></li>
+      <li><a href="/gallery" class="<%= page === 'gallery' ? 'active' : '' %>">Gallery</a></li>
+      <li><a href="/blog" class="<%= page === 'blog' ? 'active' : '' %>">Blog</a></li>
+      <li><a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact</a></li>
+    </ul>
+
+    <!-- CTA -->
+    <a href="/contact" class="btn-enroll">Enroll Now</a>
+
+    <!-- Hamburger -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>

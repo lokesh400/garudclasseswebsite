@@ -1,0 +1,36 @@
+<%- include('partials/header', { page: 'courses', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-book"></i> Manage Courses</h1>
+  <a href="/admin/courses/new" class="btn btn-primary"><i class="fas fa-plus"></i> Add Course</a>
+</div>
+
+<% if (courses && courses.length > 0) { %>
+<div class="table-responsive">
+  <table class="admin-table">
+    <thead><tr><th>Name</th><th>Category</th><th>Duration</th><th>Slug</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% courses.forEach(c => { %>
+      <tr>
+        <td><strong><i class="<%= c.icon || 'fas fa-book' %>"></i> <%= c.name %></strong></td>
+        <td><span class="badge badge-primary"><%= c.category %></span></td>
+        <td><%= c.duration || '-' %></td>
+        <td><code><%= c.slug %></code></td>
+        <td><span class="badge badge-<%= c.isActive ? 'success' : 'danger' %>"><%= c.isActive ? 'Active' : 'Inactive' %></span></td>
+        <td class="table-actions">
+          <a href="/courses/<%= c.slug %>" target="_blank" class="btn btn-sm btn-outline"><i class="fas fa-eye"></i></a>
+          <a href="/admin/courses/<%= c._id %>/edit" class="btn btn-sm btn-outline"><i class="fas fa-edit"></i></a>
+          <form action="/admin/courses/<%= c._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this course?')">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<% } else { %>
+<div class="empty-admin"><i class="fas fa-book"></i><p>No courses yet. <a href="/admin/courses/new">Add first course</a></p></div>
+<% } %>
+
+<%- include('partials/footer') %>

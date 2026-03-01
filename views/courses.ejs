@@ -1,0 +1,104 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+
+<section class="page-banner">
+  <div class="container">
+    <h1>Our <span>Courses</span></h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb"><li><a href="/">Home</a></li><li class="active">Courses</li></ol>
+    </nav>
+  </div>
+</section>
+
+<%- include('partials/flash') %>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Programs We Offer</div>
+      <h2 class="section-title">Choose Your <span class="text-gradient">Path to Success</span></h2>
+      <p class="section-desc">Whether you aim for IIT, AIIMS, or Board excellence — we have the right program for you.</p>
+    </div>
+
+    <% if (courses && courses.length > 0) { %>
+    <div class="courses-full-grid">
+      <% courses.forEach((course, i) => { %>
+      <div class="course-card-big" id="<%= course.category.toLowerCase() %>" data-aos="fade-up" data-aos-delay="<%= (i%3)*100 %>">
+        <% if (course.banner) { %>
+        <div class="ccb-banner"><img src="<%= course.banner %>" alt="<%= course.name %>" loading="lazy"></div>
+        <% } else { %>
+        <div class="ccb-banner ccb-banner-default"><i class="<%= course.icon || 'fas fa-book' %>"></i></div>
+        <% } %>
+        <div class="ccb-body">
+          <span class="course-tag course-tag-<%= course.category.toLowerCase() %>"><%= course.category %></span>
+          <h3><%= course.name %></h3>
+          <p><%= course.description || course.shortDesc %></p>
+          <% if (course.features && course.features.length > 0) { %>
+          <ul class="ccb-features">
+            <% course.features.forEach(f => { %><li><i class="fas fa-check-circle"></i> <%= f %></li><% }) %>
+          </ul>
+          <% } %>
+          <div class="ccb-meta">
+            <% if (course.duration) { %><span><i class="fas fa-clock"></i> <%= course.duration %></span><% } %>
+            <% if (course.eligibility) { %><span><i class="fas fa-user-check"></i> <%= course.eligibility %></span><% } %>
+            <% if (course.fee) { %><span><i class="fas fa-rupee-sign"></i> <%= course.fee %></span><% } %>
+          </div>
+          <div class="ccb-actions">
+            <a href="/courses/<%= course.slug %>" class="btn btn-primary">Course Details <i class="fas fa-arrow-right"></i></a>
+            <a href="/contact" class="btn btn-outline">Enquire Now</a>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <!-- Default Courses -->
+    <div class="courses-full-grid">
+      <% const defaultCourses = [
+        { id: 'jee', icon: 'fas fa-atom', tag: 'JEE', name: 'JEE Main & Advanced', desc: 'Comprehensive 2-year classroom coaching for JEE Main and Advanced. Covers complete Physics, Chemistry and Mathematics syllabus with daily practice problems, mock tests, and doubt-clearing sessions.', features: ['Expert IITian Faculty', 'Daily Practice Problems (DPP)', 'Weekly Mock Tests', 'Comprehensive Study Material', 'Online Test Series', 'Personal Mentoring'], duration: '1-2 Years', eligibility: 'Class 11 / 12 Students', fee: 'Contact for Details' },
+        { id: 'neet', icon: 'fas fa-heartbeat', tag: 'NEET', name: 'NEET UG', desc: 'Targeted coaching for NEET UG with NCERT-based teaching for Biology, Physics, and Chemistry. Our dedicated NEET faculty ensures concept clarity and exam-ready preparation.', features: ['NCERT-based Teaching', 'Biology Special Batches', 'NEET Mock Tests', 'Medical Entrance Strategy', 'Revision Modules', 'Biology HD Notes'], duration: '1-2 Years', eligibility: 'Class 11 / 12 Students', fee: 'Contact for Details' },
+        { id: 'foundation', icon: 'fas fa-graduation-cap', tag: 'FOUNDATION', name: 'Foundation (Class 8-10)', desc: 'Build a strong academic foundation with conceptual learning for school exams, NTSE, and Olympiads. Ideal for early starters aiming for top competitive exams.', features: ['Concept-based Learning', 'NTSE Preparation', 'Olympiad Training', 'School Board Exam Prep', 'Talent Hunt Programs', 'Science & Maths Focus'], duration: '1-3 Years', eligibility: 'Class 8, 9, 10 Students', fee: 'Contact for Details' },
+        { id: 'board', icon: 'fas fa-book-open', tag: 'BOARD', name: 'Board Exam Prep (11-12)', desc: 'Score 95%+ in CBSE / State Board exams with our structured programs, sample papers, and regular assessments. Both Science and Commerce streams available.', features: ['CBSE/State Board Focus', 'Previous Year Papers', 'Chapter-wise Tests', 'Revision Crash Courses', 'Scoring Strategies', 'Subject-wise Notes'], duration: '1 Year', eligibility: 'Class 11 / 12 Students', fee: 'Contact for Details' },
+        { id: 'ntse', icon: 'fas fa-star', tag: 'NTSE', name: 'NTSE / Scholarship Coaching', desc: 'Specialized coaching for NTSE Stage 1 & 2, covering MAT, SAT, and Social Studies. Our students consistently win national scholarships.', features: ['MAT & SAT Coverage', 'Previous Year Analysis', 'National Scholarship Focus', 'Aptitude Training', 'Mock Test Series', 'Stage 2 Guidance'], duration: '6-12 Months', eligibility: 'Class 10 Students', fee: 'Contact for Details' },
+        { id: 'olympiad', icon: 'fas fa-medal', tag: 'OLYMPIAD', name: 'Science Olympiad', desc: 'Train for NSO, IMO, and other national/international olympiads with advanced problem-solving techniques and expert guidance.', features: ['NSO / IMO Preparation', 'Advanced Problem Solving', 'National Level Mock Tests', 'Expert Faculty Guidance', 'Hall of Fame Students', 'International Olympiad Prep'], duration: '1 Year', eligibility: 'Class 6-12 Students', fee: 'Contact for Details' }
+      ] %>
+      <% defaultCourses.forEach((course, i) => { %>
+      <div class="course-card-big" id="<%= course.id %>" data-aos="fade-up" data-aos-delay="<%= (i%3)*100 %>">
+        <div class="ccb-banner ccb-banner-default"><i class="<%= course.icon %>"></i></div>
+        <div class="ccb-body">
+          <span class="course-tag course-tag-<%= course.tag.toLowerCase() %>"><%= course.tag %></span>
+          <h3><%= course.name %></h3>
+          <p><%= course.desc %></p>
+          <ul class="ccb-features">
+            <% course.features.forEach(f => { %><li><i class="fas fa-check-circle"></i> <%= f %></li><% }) %>
+          </ul>
+          <div class="ccb-meta">
+            <span><i class="fas fa-clock"></i> <%= course.duration %></span>
+            <span><i class="fas fa-user-check"></i> <%= course.eligibility %></span>
+            <span><i class="fas fa-rupee-sign"></i> <%= course.fee %></span>
+          </div>
+          <div class="ccb-actions">
+            <a href="/contact" class="btn btn-primary">Enquire Now <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container cta-inner">
+    <div class="cta-text">
+      <h2>Not Sure Which Course Is <span>Right for You?</span></h2>
+      <p>Talk to our academic counsellors for free guidance and course recommendation.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="/contact" class="btn btn-white btn-lg">Free Counselling <i class="fas fa-arrow-right"></i></a>
+      <a href="tel:+91XXXXXXXXXX" class="btn btn-outline-white btn-lg"><i class="fas fa-phone"></i> Call Now</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

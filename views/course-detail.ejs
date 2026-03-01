@@ -1,0 +1,80 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+
+<section class="page-banner">
+  <div class="container">
+    <h1><%= course.name %></h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb"><li><a href="/">Home</a></li><li><a href="/courses">Courses</a></li><li class="active"><%= course.name %></li></ol>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="course-detail-grid">
+      <div class="cd-main">
+        <% if (course.banner) { %>
+        <img src="<%= course.banner %>" alt="<%= course.name %>" class="cd-banner" loading="lazy">
+        <% } %>
+        <h2><%= course.name %></h2>
+        <p><%= course.description %></p>
+
+        <% if (course.features && course.features.length > 0) { %>
+        <h3><i class="fas fa-list-check"></i> Course Features</h3>
+        <ul class="cd-features">
+          <% course.features.forEach(f => { %><li><i class="fas fa-check-circle"></i> <%= f %></li><% }) %>
+        </ul>
+        <% } %>
+
+        <% if (course.syllabus && course.syllabus.length > 0) { %>
+        <h3><i class="fas fa-book-open"></i> Course Syllabus</h3>
+        <div class="cd-syllabus">
+          <% course.syllabus.forEach((s, i) => { %>
+          <div class="syllabus-item">
+            <button class="syllabus-toggle" onclick="toggleSyllabus(this)">
+              <span><%= i+1 %>. <%= s.topic %></span><i class="fas fa-chevron-down"></i>
+            </button>
+            <ul class="syllabus-content">
+              <% (s.subtopics || []).forEach(sub => { %><li><i class="fas fa-dot-circle"></i> <%= sub %></li><% }) %>
+            </ul>
+          </div>
+          <% }) %>
+        </div>
+        <% } %>
+      </div>
+
+      <div class="cd-sidebar">
+        <div class="cd-info-card">
+          <h4>Course Info</h4>
+          <% if (course.duration) { %><div class="cd-info-row"><i class="fas fa-clock"></i><span>Duration</span><strong><%= course.duration %></strong></div><% } %>
+          <% if (course.eligibility) { %><div class="cd-info-row"><i class="fas fa-user-check"></i><span>Eligibility</span><strong><%= course.eligibility %></strong></div><% } %>
+          <% if (course.fee) { %><div class="cd-info-row"><i class="fas fa-rupee-sign"></i><span>Fee</span><strong><%= course.fee %></strong></div><% } %>
+          <div class="cd-info-row"><i class="fas fa-tag"></i><span>Category</span><strong><%= course.category %></strong></div>
+          <a href="/contact" class="btn btn-primary btn-block mt-3">Enroll Now <i class="fas fa-arrow-right"></i></a>
+          <a href="tel:+91XXXXXXXXXX" class="btn btn-outline btn-block mt-2"><i class="fas fa-phone"></i> Enquire by Call</a>
+        </div>
+        <div class="cd-why-card">
+          <h4>Why Choose This Course?</h4>
+          <ul>
+            <li><i class="fas fa-star"></i> Expert-designed curriculum</li>
+            <li><i class="fas fa-star"></i> Proven track record of results</li>
+            <li><i class="fas fa-star"></i> Small batch sizes for attention</li>
+            <li><i class="fas fa-star"></i> Regular doubt sessions</li>
+            <li><i class="fas fa-star"></i> Study material included</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleSyllabus(btn) {
+  const content = btn.nextElementSibling;
+  content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  btn.querySelector('i').style.transform = content.style.display === 'block' ? 'rotate(180deg)' : '';
+}
+</script>
+
+<%- include('partials/footer') %>

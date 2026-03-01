@@ -1,0 +1,98 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+
+<section class="page-banner">
+  <div class="container">
+    <h1>Our <span>Faculty</span></h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb"><li><a href="/">Home</a></li><li class="active">Faculty</li></ol>
+    </nav>
+  </div>
+</section>
+
+<%- include('partials/flash') %>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Expert Educators</div>
+      <h2 class="section-title">Meet the <span class="text-gradient">Minds Behind Success</span></h2>
+      <p class="section-desc">Our faculty comprises IITians, AIIMS-qualified doctors, and top educators with decades of combined experience.</p>
+    </div>
+
+    <% if (faculties && faculties.length > 0) { %>
+    <div class="faculty-full-grid">
+      <% faculties.forEach((f, i) => { %>
+      <div class="faculty-card-big" data-aos="fade-up" data-aos-delay="<%= (i%4)*80 %>">
+        <div class="fcb-photo-wrap">
+          <img src="<%= f.photo || '/img/default-faculty.png' %>" alt="<%= f.name %>" loading="lazy">
+        </div>
+        <div class="fcb-info">
+          <h3><%= f.name %></h3>
+          <p class="fcb-desig"><%= f.designation %></p>
+          <div class="fcb-tags">
+            <span><i class="fas fa-flask"></i> <%= f.subject %></span>
+            <% if (f.experience) { %><span><i class="fas fa-clock"></i> <%= f.experience %></span><% } %>
+            <% if (f.qualification) { %><span><i class="fas fa-graduation-cap"></i> <%= f.qualification %></span><% } %>
+          </div>
+          <% if (f.about) { %><p class="fcb-about"><%= f.about %></p><% } %>
+          <% if (f.achievements && f.achievements.length > 0) { %>
+          <div class="fcb-achievements">
+            <h5><i class="fas fa-medal"></i> Key Achievements</h5>
+            <ul>
+              <% f.achievements.forEach(a => { %><li><i class="fas fa-check"></i> <%= a %></li><% }) %>
+            </ul>
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <!-- Default sample faculty cards -->
+    <div class="faculty-full-grid">
+      <% const sampleFaculty = [
+        { name: 'Dr. Rajesh Kumar', designation: 'HOD - Physics', subject: 'Physics', exp: '15+ Years', qual: 'B.Tech IIT Delhi, PhD', about: 'Dr. Rajesh Kumar is a passionate Physics educator with 15+ years of experience. Trained at IIT Delhi, he has helped hundreds of students crack JEE Advanced with AIR under 500.', achievements: ['500+ JEE selections', 'IIT Delhi Alumni', 'Author of Physics DPP Series'] },
+        { name: 'Prof. Sunita Sharma', designation: 'HOD - Chemistry', subject: 'Chemistry', exp: '12+ Years', qual: 'M.Sc IIT Bombay, PhD', about: 'Prof. Sunita is known for making complex chemistry concepts simple. Her unique teaching style and comprehensive notes have helped thousands of students.', achievements: ['Trained 3000+ students', 'IIT Bombay Alumni', 'Best Faculty Award 2022'] },
+        { name: 'Mr. Arun Malhotra', designation: 'Senior Mathematics Faculty', subject: 'Mathematics', exp: '10+ Years', qual: 'B.Tech IIT Kanpur', about: 'Arun sir specializes in making mathematics easy and enjoyable. His shortcut techniques and problem-solving approaches are legendary among students.', achievements: ['800+ JEE students', 'IIT Kanpur Alumni', 'Mathematics Olympiad Trainer'] },
+        { name: 'Dr. Priya Gupta', designation: 'Senior Biology Faculty', subject: 'Biology (NEET)', exp: '8+ Years', qual: 'MBBS, MD', about: 'Dr. Priya bridges the gap between medical education and competitive exam preparation. Her NEET Biology classes are comprehensive and NCERT-focused.', achievements: ['600+ NEET qualifiers', 'AIIMS trained', 'Best NEET Faculty 2023'] }
+      ] %>
+      <% sampleFaculty.forEach((f, i) => { %>
+      <div class="faculty-card-big" data-aos="fade-up" data-aos-delay="<%= (i%4)*80 %>">
+        <div class="fcb-photo-wrap">
+          <img src="/img/default-faculty.png" alt="<%= f.name %>" loading="lazy">
+        </div>
+        <div class="fcb-info">
+          <h3><%= f.name %></h3>
+          <p class="fcb-desig"><%= f.designation %></p>
+          <div class="fcb-tags">
+            <span><i class="fas fa-flask"></i> <%= f.subject %></span>
+            <span><i class="fas fa-clock"></i> <%= f.exp %></span>
+            <span><i class="fas fa-graduation-cap"></i> <%= f.qual %></span>
+          </div>
+          <p class="fcb-about"><%= f.about %></p>
+          <div class="fcb-achievements">
+            <h5><i class="fas fa-medal"></i> Key Achievements</h5>
+            <ul><% f.achievements.forEach(a => { %><li><i class="fas fa-check"></i> <%= a %></li><% }) %></ul>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container cta-inner">
+    <div class="cta-text">
+      <h2>Learn from the <span>Best in the Business</span></h2>
+      <p>Our faculty is committed to your success. Enroll and experience the difference.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="/contact" class="btn btn-white btn-lg">Book Free Counselling <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

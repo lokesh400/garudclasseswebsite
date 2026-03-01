@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="icon" href="/img/favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body class="admin-login-page">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-icon"><i class="fas fa-feather-alt"></i></div>
+        <div class="logo-text">
+          <span class="logo-main">GARUD</span>
+          <span class="logo-sub">CLASSES</span>
+        </div>
+      </div>
+      <h2>Admin Login</h2>
+      <p>Access the admin panel to manage your website.</p>
+      
+      <%- include('../partials/flash') %>
+
+      <form action="/admin/login" method="POST" class="login-form">
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> Admin Email</label>
+          <input type="email" name="email" placeholder="admin@garudclasses.com" required>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-lock"></i> Password</label>
+          <input type="password" name="password" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          Login <i class="fas fa-sign-in-alt"></i>
+        </button>
+      </form>
+      <div class="login-footer">
+        <a href="/" target="_blank"><i class="fas fa-globe"></i> View Website</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

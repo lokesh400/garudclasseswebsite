@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- ── SEO Meta Tags ── -->
+  <title><%= locals.title || 'Garud Classes - Excellence in Education' %></title>
+  <meta name="description" content="<%= locals.description || 'Garud Classes - Premier coaching for JEE, NEET, Board Exams, NTSE and Olympiads.' %>">
+  <meta name="keywords" content="<%= locals.keywords || 'coaching institute, JEE, NEET, board exams, Garud Classes' %>">
+  <meta name="author" content="Garud Classes">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="<%= siteUrl %><%= locals.currentPath || '' %>">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:title" content="<%= locals.title || 'Garud Classes' %>">
+  <meta property="og:description" content="<%= locals.description || 'Garud Classes - Premier coaching institute.' %>">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= siteUrl %>">
+  <meta property="og:image" content="<%= siteUrl %>/img/og-image.jpg">
+  <meta property="og:site_name" content="Garud Classes">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- ── Twitter Card ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= locals.title || 'Garud Classes' %>">
+  <meta name="twitter:description" content="<%= locals.description || 'Premier coaching institute for JEE, NEET and Board Exams.' %>">
+  <meta name="twitter:image" content="<%= siteUrl %>/img/og-image.jpg">
+
+  <!-- ── Favicon ── -->
+  <link rel="icon" href="/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/favicon.png">
+
+  <!-- ── Fonts & Icons ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- ── Styles ── -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ── JSON-LD Structured Data ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Garud Classes",
+    "url": "<%= siteUrl %>",
+    "logo": "<%= siteUrl %>/img/logo.png",
+    "description": "Garud Classes is a premier coaching institute offering expert coaching for JEE, NEET, Board Exams, NTSE, and Olympiads.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "IN"
+    },
+    "telephone": "+91-XXXXXXXXXX",
+    "sameAs": ["https://www.garudclasses.com"]
+  }
+  </script>
+</head>
+<body>

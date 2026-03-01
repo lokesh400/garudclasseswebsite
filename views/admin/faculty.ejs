@@ -1,0 +1,36 @@
+<%- include('partials/header', { page: 'faculty', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-chalkboard-teacher"></i> Manage Faculty</h1>
+  <a href="/admin/faculty/new" class="btn btn-primary"><i class="fas fa-plus"></i> Add Faculty</a>
+</div>
+
+<% if (faculties && faculties.length > 0) { %>
+<div class="table-responsive">
+  <table class="admin-table">
+    <thead><tr><th>Photo</th><th>Name</th><th>Designation</th><th>Subject</th><th>Experience</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% faculties.forEach(f => { %>
+      <tr>
+        <td><img src="<%= f.photo || '/img/default-faculty.png' %>" alt="" class="table-img"></td>
+        <td><strong><%= f.name %></strong></td>
+        <td><%= f.designation %></td>
+        <td><%= f.subject %></td>
+        <td><%= f.experience || '-' %></td>
+        <td><span class="badge badge-<%= f.isActive ? 'success' : 'danger' %>"><%= f.isActive ? 'Active' : 'Inactive' %></span></td>
+        <td class="table-actions">
+          <a href="/admin/faculty/<%= f._id %>/edit" class="btn btn-sm btn-outline"><i class="fas fa-edit"></i></a>
+          <form action="/admin/faculty/<%= f._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this faculty?')">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<% } else { %>
+<div class="empty-admin"><i class="fas fa-chalkboard-teacher"></i><p>No faculty yet. <a href="/admin/faculty/new">Add first faculty</a></p></div>
+<% } %>
+
+<%- include('partials/footer') %>

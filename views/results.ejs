@@ -1,0 +1,101 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+
+<section class="page-banner">
+  <div class="container">
+    <h1>Our <span>Results</span></h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb"><li><a href="/">Home</a></li><li class="active">Results</li></ol>
+    </nav>
+  </div>
+</section>
+
+<%- include('partials/flash') %>
+
+<!-- Stats Bar -->
+<div class="results-stats-bar">
+  <div class="container results-stats-inner">
+    <div class="r-stat"><i class="fas fa-trophy"></i><strong>500+</strong><span>IIT Selections</span></div>
+    <div class="r-stat"><i class="fas fa-heartbeat"></i><strong>800+</strong><span>NEET Qualifiers</span></div>
+    <div class="r-stat"><i class="fas fa-star"></i><strong>200+</strong><span>Board Toppers</span></div>
+    <div class="r-stat"><i class="fas fa-award"></i><strong>100+</strong><span>NTSE Scholars</span></div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Filter Bar -->
+    <form class="filter-bar" method="GET" action="/results">
+      <div class="filter-group">
+        <label>Filter by Year</label>
+        <select name="year" onchange="this.form.submit()">
+          <option value="">All Years</option>
+          <% years.forEach(y => { %>
+          <option value="<%= y %>" <%= selectedYear == y ? 'selected' : '' %>><%= y %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Filter by Exam</label>
+        <select name="category" onchange="this.form.submit()">
+          <option value="">All Exams</option>
+          <% categories.forEach(c => { %>
+          <option value="<%= c %>" <%= selectedCategory === c ? 'selected' : '' %>><%= c %></option>
+          <% }) %>
+        </select>
+      </div>
+      <% if (selectedYear || selectedCategory) { %>
+      <a href="/results" class="btn btn-sm btn-outline">Clear Filters <i class="fas fa-times"></i></a>
+      <% } %>
+    </form>
+
+    <!-- Results Grid -->
+    <% if (results && results.length > 0) { %>
+    <div class="results-full-grid">
+      <% results.forEach((r, i) => { %>
+      <div class="result-card-big" data-aos="fade-up" data-aos-delay="<%= (i%4) * 80 %>">
+        <% if (r.isBoardTopper || r.isStateTopper) { %>
+        <div class="result-crown"><i class="fas fa-crown"></i> <%= r.isStateTopper ? 'State Topper' : 'Board Topper' %></div>
+        <% } %>
+        <img src="<%= r.photo || '/img/default-student.png' %>" alt="<%= r.studentName %>" loading="lazy">
+        <div class="rcb-info">
+          <h4><%= r.studentName %></h4>
+          <% if (r.fatherName) { %><p class="rcb-father">S/D of <%= r.fatherName %></p><% } %>
+          <p class="rcb-exam"><%= r.exam %> — <%= r.year %></p>
+          <div class="rcb-scores">
+            <% if (r.rank) { %><span class="score-badge score-rank"><i class="fas fa-medal"></i> <%= r.rank %></span><% } %>
+            <% if (r.score) { %><span class="score-badge score-marks"><i class="fas fa-star"></i> <%= r.score %></span><% } %>
+            <% if (r.percentile) { %><span class="score-badge score-pct"><i class="fas fa-percent"></i> <%= r.percentile %>%ile</span><% } %>
+          </div>
+          <% if (r.batch) { %><p class="rcb-batch"><i class="fas fa-users"></i> Batch: <%= r.batch %></p><% } %>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <div class="empty-state">
+      <i class="fas fa-trophy"></i>
+      <h3>Results Coming Soon</h3>
+      <p>We are updating our results. Check back soon!</p>
+      <% if (selectedYear || selectedCategory) { %>
+      <a href="/results" class="btn btn-primary">View All Results</a>
+      <% } %>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container cta-inner">
+    <div class="cta-text">
+      <h2>Your Name Could Be <span>Here Next!</span></h2>
+      <p>Join Garud Classes and become part of our growing list of achievers.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="/contact" class="btn btn-white btn-lg">Enroll Now <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

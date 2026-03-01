@@ -1,0 +1,109 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+
+<section class="page-banner">
+  <div class="container">
+    <h1>Contact <span>Us</span></h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb"><li><a href="/">Home</a></li><li class="active">Contact</li></ol>
+    </nav>
+  </div>
+</section>
+
+<%- include('partials/flash') %>
+
+<section class="section">
+  <div class="container">
+    <!-- Contact Cards -->
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="cc-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <h4>Visit Us</h4>
+        <p>Your Institute Address,<br>City, State - PINCODE</p>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon"><i class="fas fa-phone-alt"></i></div>
+        <h4>Call Us</h4>
+        <p><a href="tel:+91XXXXXXXXXX">+91-XXXXXXXXXX</a><br><a href="tel:+91XXXXXXXXXX">+91-XXXXXXXXXX</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon"><i class="fas fa-envelope"></i></div>
+        <h4>Email Us</h4>
+        <p><a href="mailto:info@garudclasses.com">info@garudclasses.com</a><br><a href="mailto:admissions@garudclasses.com">admissions@garudclasses.com</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon"><i class="fas fa-clock"></i></div>
+        <h4>Office Hours</h4>
+        <p>Mon – Sat: 8:00 AM – 8:00 PM<br>Sunday: 10:00 AM – 2:00 PM</p>
+      </div>
+    </div>
+
+    <!-- Main Contact Section -->
+    <div class="contact-main-grid">
+      <!-- Enquiry Form -->
+      <div class="contact-form-wrap">
+        <h2>Send Us a <span class="text-gradient">Message</span></h2>
+        <p>Fill the form and our team will get back to you within 24 hours.</p>
+        <form class="contact-form" action="/contact" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name *</label>
+              <input type="text" id="name" name="name" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <select id="subject" name="subject">
+                <option value="Admissions Enquiry">Admissions Enquiry</option>
+                <option value="JEE Coaching">JEE Coaching</option>
+                <option value="NEET Coaching">NEET Coaching</option>
+                <option value="Foundation Course">Foundation Course</option>
+                <option value="Board Exam Prep">Board Exam Prep</option>
+                <option value="Fee Structure">Fee Structure</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message *</label>
+            <textarea id="message" name="message" rows="5" placeholder="Write your query here..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            Send Message <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- Map & Info -->
+      <div class="contact-map-wrap">
+        <h2>Find <span class="text-gradient">Us Here</span></h2>
+        <div class="map-embed">
+          <!-- Replace src with your actual Google Maps embed link -->
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0852!2d77.2090!3d28.6139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zGarud+Classes!5e0!3m2!1sen!2sin!4v1" 
+            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" 
+            title="Garud Classes Location">
+          </iframe>
+        </div>
+        <div class="contact-whatsapp">
+          <h4><i class="fab fa-whatsapp"></i> Quick Enquiry on WhatsApp</h4>
+          <p>Chat with us directly for admission details, fee structure, and batch schedules.</p>
+          <a href="https://wa.me/91XXXXXXXXXX?text=Hello!%20I%20want%20to%20enquire%20about%20admissions%20at%20Garud%20Classes." class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Chat Now on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
