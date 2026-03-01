@@ -9,6 +9,8 @@ const helmet = require('helmet');
 const compression = require('compression');
 const path = require('path');
 const passport = require('passport');
+const http = require('http');
+const https = require('https');
 const Admin = require('./models/Admin');
 
 const app = express();
@@ -99,6 +101,37 @@ app.use((err, req, res, next) => {
     error: process.env.NODE_ENV === 'development' ? err : {}
   });
 });
+
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
+function startKeepAlive() {
+  const url = "https://garudclasses.com";
+  if (!url) {
+    console.warn("⚠️ RENDER_EXTERNAL_URL not set, keep-alive disabled");
+    return;
+  }
+  const isHttps = url.startsWith("https");
+  const client = isHttps ? https : http;
+  const pingUrl = `${url}/health`;
+  setInterval(() => {
+    const req = client.get(pingUrl, (res) => {
+      console.log(`🔄 Keep-alive ping → ${res.statusCode}`);
+      res.resume();
+    });
+    req.on("error", (err) => {
+      console.error("❌ Keep-alive error:", err.message);
+    });
+    req.setTimeout(5000, () => {
+      console.warn("⏱️ Keep-alive timeout");
+      req.destroy();
+    });
+  }, 10000);
+}
+
+startKeepAlive();
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
