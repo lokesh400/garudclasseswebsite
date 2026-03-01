@@ -94,27 +94,24 @@
      BANNER SLIDER
 ══════════════════════════════════════════════════════════ -->
 <% const activeBanners = (typeof banners !== 'undefined' && banners.length > 0) ? banners : [
-  { title: 'Admissions Open 2025–26', subtitle: 'JEE Main & Advanced | NEET-UG | Foundation Batches', image: '/img/hero-students.svg', buttonText: 'Enroll Now', buttonLink: '/contact', bgColor: '#1d3557' },
-  { title: 'Board Exam Special Batch', subtitle: 'Score 90%+ with our expert faculty — limited seats', image: '/img/hero-students.svg', buttonText: 'View Courses', buttonLink: '/courses', bgColor: '#0d2137' },
-  { title: 'NEET 2025 Crash Course', subtitle: 'Intensive 3-month program starting April 2025', image: '/img/hero-students.svg', buttonText: 'Know More', buttonLink: '/courses', bgColor: '#1a0a2e' }
+  { image: '/img/hero-students.svg', bgColor: '#1d3557' },
+  { image: '/img/hero-students.svg', bgColor: '#0d2137' },
+  { image: '/img/hero-students.svg', bgColor: '#1a0a2e' }
 ]; %>
+
+<br>
 
 <section class="banner-slider-section">
   <div class="banner-slider" id="bannerSlider">
     <div class="banner-track" id="bannerTrack">
       <% activeBanners.forEach((b, i) => { %>
-      <div class="banner-slide" style="background-color:<%= b.bgColor || '#1d3557' %>;">
+      <div class="banner-slide" style="background-color:<%= b.bgColor || '#1d3557' %>">
         <div class="banner-slide-img" style="background-image:url('<%= b.image %>')"></div>
-
       </div>
       <% }) %>
     </div>
-
-    <!-- Controls -->
     <button class="banner-prev" id="bannerPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
     <button class="banner-next" id="bannerNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
-
-    <!-- Dots -->
     <div class="banner-dots" id="bannerDots">
       <% activeBanners.forEach((b, i) => { %>
       <span class="banner-dot <%= i === 0 ? 'active' : '' %>" data-index="<%= i %>"></span>
@@ -122,10 +119,6 @@
     </div>
   </div>
 </section>
-
-<!-- ══════════════════════════════════════════════════════════
-     COURSES SECTION
-══════════════════════════════════════════════════════════ -->
 <section class="section courses-section" id="courses">
   <div class="container">
     <div class="section-header">

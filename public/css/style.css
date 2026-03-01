@@ -972,7 +972,10 @@ input, textarea, select, button { font-family: var(--font); }
 /* ══════════════════════════════════════════════════════════
    BANNER SLIDER
 ══════════════════════════════════════════════════════════ */
-.banner-slider-section { width: 100%; overflow: hidden; }
+.banner-slider-section {
+  width: 100%;
+  overflow: hidden;
+}
 
 .banner-slider {
   position: relative;
