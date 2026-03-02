@@ -111,7 +111,7 @@ app.use((err, req, res, next) => {
 
 function startKeepAlive(port) {
   setInterval(async () => {
-    const result = await axios.get(`http://garudclasses.com/health`, { timeout: 5000 }).catch(err => {
+    const result = await axios.get(`https://garudclasses.com/health`, { timeout: 5000 }).catch(err => {
       console.error('Keep-alive error:', err.message);
       return null;
     });
