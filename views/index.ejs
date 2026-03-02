@@ -3,6 +3,18 @@
 <%- include('partials/flash') %>
 
 <!-- ══════════════════════════════════════════════════════════
+     POPUP MODAL OVERLAY
+══════════════════════════════════════════════════════════ -->
+<% if (typeof popup !== 'undefined' && popup && popup.image) { %>
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-modal">
+    <button class="popup-close" id="popupClose" aria-label="Close">&times;</button>
+    <img src="<%= popup.image %>" alt="Garud Classes" class="popup-image" />
+  </div>
+</div>
+<% } %>
+
+<!-- ══════════════════════════════════════════════════════════
      HERO SECTION
 ══════════════════════════════════════════════════════════ -->
 <section class="hero">
@@ -105,8 +117,8 @@
   <div class="banner-slider" id="bannerSlider">
     <div class="banner-track" id="bannerTrack">
       <% activeBanners.forEach((b, i) => { %>
-      <div class="banner-slide" style="background-color:<%= b.bgColor || '#1d3557' %>">
-        <div class="banner-slide-img" style="background-image:url('<%= b.image %>')"></div>
+      <div class="banner-slide">
+        <img src="<%= b.image %>" alt="Banner" class="banner-img" />
       </div>
       <% }) %>
     </div>
@@ -491,3 +503,20 @@
 </section>
 
 <%- include('partials/footer') %>
+
+<script>
+  (function () {
+    var overlay = document.getElementById('popupOverlay');
+    if (!overlay) return;
+    window.closePopup = function () {
+      overlay.classList.add('popup-hidden');
+      overlay.classList.remove('popup-visible');
+    };
+    // Show on every page load
+    overlay.classList.add('popup-visible');
+    document.getElementById('popupClose').addEventListener('click', window.closePopup);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) window.closePopup();
+    });
+  })();
+</script>

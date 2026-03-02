@@ -5,27 +5,30 @@ const Faculty = require('../models/Faculty');
 const Course = require('../models/Course');
 const Blog = require('../models/Blog');
 const Banner = require('../models/Banner');
+const PopupModal = require('../models/PopupModal');
 
 // Home Page
 router.get('/', async (req, res) => {
   try {
-    const [topResults, faculties, courses, blogs, banners] = await Promise.all([
-      Result.find({ isBoardTopper: true }).sort({ year: -1 }).limit(6),
+    const [topResults, faculties, courses, blogs, banners, popup] = await Promise.all([
+      Result.find().sort({ year: -1 }).limit(6),
       Faculty.find({ isActive: true }).sort({ order: 1 }).limit(8),
       Course.find({ isActive: true }).sort({ order: 1 }),
       Blog.find({ isPublished: true }).sort({ publishedAt: -1 }).limit(3),
-      Banner.find({ isActive: true }).sort({ order: 1 })
+      Banner.find({ isActive: true }).sort({ order: 1 }),
+      PopupModal.findOne()
     ]);
     res.render('index', {
       title: 'Garud Classes - Best Coaching Institute for JEE, NEET, Foundation',
       description: 'Garud Classes is a premier coaching institute offering expert coaching for JEE, NEET, Board Exams, NTSE, and Olympiads. Join thousands of successful students.',
       keywords: 'garud classes, coaching institute, JEE coaching, NEET coaching, best coaching, garudclasses.com',
       topResults, faculties, courses, blogs, banners,
+      popup: popup && popup.isActive ? popup : null,
       page: 'home'
     });
   } catch (err) {
     console.error(err);
-    res.render('index', { title: 'Garud Classes', description: '', keywords: '', topResults: [], faculties: [], courses: [], blogs: [], banners: [], page: 'home' });
+    res.render('index', { title: 'Garud Classes', description: '', keywords: '', topResults: [], faculties: [], courses: [], blogs: [], banners: [], popup: null, page: 'home' });
   }
 });
 

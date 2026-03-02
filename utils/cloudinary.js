@@ -9,13 +9,13 @@ cloudinary.config({
 });
 
 // One storage per folder so images are organized in Cloudinary
-const makeStorage = (folder) =>
+const makeStorage = (folder, transformation) =>
   new CloudinaryStorage({
     cloudinary,
     params: {
-      folder:         `garudclasses/${folder}`,
+      folder:          `garudclasses/${folder}`,
       allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'],
-      transformation: [{ quality: 'auto', fetch_format: 'auto' }],
+      transformation:  transformation || [{ quality: 'auto', fetch_format: 'auto' }],
     },
   });
 
@@ -25,7 +25,8 @@ const uploaders = {
   courses:  multer({ storage: makeStorage('courses'),  limits: { fileSize: 5 * 1024 * 1024 } }),
   gallery:  multer({ storage: makeStorage('gallery'),  limits: { fileSize: 5 * 1024 * 1024 } }),
   blog:     multer({ storage: makeStorage('blog'),     limits: { fileSize: 5 * 1024 * 1024 } }),
-  banners:  multer({ storage: makeStorage('banners'),  limits: { fileSize: 5 * 1024 * 1024 } }),
+  banners:  multer({ storage: makeStorage('banners', [{ width: 1400, height: 500, crop: 'fit', quality: 'auto', fetch_format: 'auto' }]),  limits: { fileSize: 5 * 1024 * 1024 } }),
+  popup:    multer({ storage: makeStorage('popup'),    limits: { fileSize: 5 * 1024 * 1024 } }),
 };
 
 module.exports = { cloudinary, uploaders };

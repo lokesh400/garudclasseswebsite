@@ -10,6 +10,7 @@ const Blog = require('../models/Blog');
 const Contact = require('../models/Contact');
 const Banner = require('../models/Banner');
 const Background = require('../models/Background');
+const PopupModal = require('../models/PopupModal');
 const { cloudinary, uploaders } = require('../utils/cloudinary');
 
 // Helper: extract Cloudinary public_id from URL for deletion
@@ -305,6 +306,33 @@ router.delete('/background/:id', isAdmin, async (req, res) => {
   await Background.findByIdAndDelete(req.params.id);
   req.flash('success', 'Background deleted');
   res.redirect('/admin/background');
+});
+
+// ─── Popup Modal Settings ─────────────────────────────────────────────────
+router.get('/popup-modal', isAdmin, async (req, res) => {
+  let popup = await PopupModal.findOne();
+  if (!popup) popup = await PopupModal.create({});
+  res.render('admin/popup-modal', { title: 'Popup Modal Settings', description: '', keywords: '', popup, page: 'popup' });
+});
+
+router.post('/popup-modal', isAdmin, uploaders.popup.single('image'), async (req, res) => {
+  try {
+    const data = { ...req.body, isActive: req.body.isActive === 'true' };
+    if (req.file) data.image = req.file.path;
+    let popup = await PopupModal.findOne();
+    if (popup) {
+      // If new image uploaded, delete old one from Cloudinary
+      if (req.file && popup.image) {
+        const pid = getPublicId(popup.image);
+        if (pid) cloudinary.uploader.destroy(pid).catch(() => {});
+      }
+      await PopupModal.findByIdAndUpdate(popup._id, data);
+    } else {
+      await PopupModal.create(data);
+    }
+    req.flash('success', 'Popup modal updated');
+    res.redirect('/admin/popup-modal');
+  } catch (err) { req.flash('error', err.message); res.redirect('/admin/popup-modal'); }
 });
 
 // ─── Contacts ──────────────────────────────────────────────────────────────
