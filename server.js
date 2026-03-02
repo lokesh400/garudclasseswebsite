@@ -122,5 +122,5 @@ function startKeepAlive(port) {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Garud Classes running at http://localhost:${PORT}`);
-  // startKeepAlive();
+  startKeepAlive();
 });
