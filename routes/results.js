@@ -14,9 +14,9 @@ router.get('/', async (req, res) => {
     const results = await Result.find(filter).sort({ year: -1, rank: 1 });
     
     res.render('results', {
-      title: 'Results | Garud Classes - JEE, NEET, Board Toppers',
-      description: 'View outstanding results of Garud Classes students in JEE, NEET, Board Exams, NTSE and Olympiads. Our students consistently top nationwide.',
-      keywords: 'garud classes results, JEE result, NEET result, board topper, garud classes toppers',
+      title: 'Results | Garud Classes Palwal — JEE, NEET & Board Toppers from Palwal',
+      description: 'See the outstanding JEE, NEET, Board & NTSE results of students at Garud Classes, the No. 1 coaching institute in Palwal Haryana. Our students consistently rank among the top across Haryana and India.',
+      keywords: 'garud classes results Palwal, JEE result Palwal, NEET result Palwal, board topper Palwal, best coaching results Palwal Haryana, garud classes toppers',
       results, years: years.sort((a, b) => b - a), categories,
       selectedYear: year || '', selectedCategory: category || '',
       page: 'results'

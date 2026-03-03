@@ -4,9 +4,9 @@ const Contact = require('../models/Contact');
 
 router.get('/', (req, res) => {
   res.render('contact', {
-    title: 'Contact Us | Garud Classes - Admissions & Enquiry',
-    description: 'Contact Garud Classes for admissions, course enquiry, or any information. Visit us, call us, or fill the enquiry form. We are here to help!',
-    keywords: 'garud classes contact, admission enquiry, coaching admission, garud classes address',
+    title: 'Contact Garud Classes Palwal — Admissions, Enquiry & Location',
+    description: 'Contact Garud Classes in Palwal, Haryana for JEE, NEET, Foundation & Board coaching admissions. Call +91 98969 13009, WhatsApp, or fill the enquiry form. Best institute near you in Palwal.',
+    keywords: 'garud classes contact Palwal, admission enquiry Palwal coaching, best coaching Palwal contact, Garud Classes address Palwal, coaching admission Palwal Haryana',
     page: 'contact'
   });
 });

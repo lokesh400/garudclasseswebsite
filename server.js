@@ -67,6 +67,7 @@ app.use(async (req, res, next) => {
   res.locals.error = req.flash('error');
   res.locals.currentUser = req.user || null;
   res.locals.siteUrl = process.env.SITE_URL || 'https://www.garudclasses.com';
+  res.locals.currentPath = req.path;
   try {
     res.locals.basicLinks = await QuickLink.find({ isActive: true, category: 'basic' }).sort({ order: 1 }).lean();
     res.locals.bannerLink = await QuickLink.findOne({ isActive: true, category: 'banner' }).lean() || null;

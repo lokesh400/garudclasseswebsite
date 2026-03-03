@@ -44,21 +44,56 @@
   <!-- ── Styles ── -->
   <link rel="stylesheet" href="/css/style.css">
 
+  <!-- ── Geo Meta (Palwal, Haryana) ── -->
+  <meta name="geo.region" content="IN-HR">
+  <meta name="geo.placename" content="Palwal, Haryana, India">
+  <meta name="geo.position" content="28.1522;77.3219">
+  <meta name="ICBM" content="28.1522, 77.3219">
+
   <!-- ── JSON-LD Structured Data ── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
+    "@type": ["EducationalOrganization", "LocalBusiness"],
     "name": "Garud Classes",
+    "alternateName": ["Garud Classes Palwal", "Best Coaching Institute Palwal"],
     "url": "<%= siteUrl %>",
     "logo": "<%= siteUrl %>/img/logo.png",
-    "description": "Garud Classes is a premier coaching institute offering expert coaching for JEE, NEET, Board Exams, NTSE, and Olympiads.",
+    "image": "<%= siteUrl %>/img/og-image.jpg",
+    "description": "Garud Classes is the No. 1 coaching institute in Palwal, Haryana offering expert coaching for JEE Main & Advanced, NEET UG, Foundation, Board Exams, NTSE and Olympiads.",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Palwal",
+      "addressLocality": "Palwal",
+      "addressRegion": "Haryana",
+      "postalCode": "121102",
       "addressCountry": "IN"
     },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 28.1522,
+      "longitude": 77.3219
+    },
     "telephone": "+919896913009",
-    "sameAs": ["https://www.garudclasses.com"]
+    "email": "info@garudclasses.com",
+    "priceRange": "₹₹",
+    "openingHours": "Mo-Sa 07:00-20:00",
+    "areaServed": ["Palwal", "Faridabad", "Ballabhgarh", "Hodal", "Hathin", "Haryana", "NCR"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Coaching Programs",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "JEE Main & Advanced Coaching Palwal" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "NEET UG Coaching Palwal" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "Foundation Coaching Class 8-10 Palwal" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "Board Exam Coaching 11th 12th Palwal" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "NTSE Coaching Palwal" } }
+      ]
+    },
+    "sameAs": [
+      "https://www.garudclasses.com",
+      "https://www.instagram.com/garudclasses/"
+    ]
   }
   </script>
 </head>

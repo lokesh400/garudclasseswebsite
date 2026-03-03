@@ -6,9 +6,9 @@ router.get('/', async (req, res) => {
   try {
     const courses = await Course.find({ isActive: true }).sort({ order: 1 });
     res.render('courses', {
-      title: 'Courses | Garud Classes - JEE, NEET, Foundation & Board Coaching',
-      description: 'Explore all courses at Garud Classes - JEE Main & Advanced, NEET UG, Foundation, Board Exam preparation, NTSE, and Olympiad coaching programs.',
-      keywords: 'garud classes courses, JEE coaching, NEET coaching, foundation class, board coaching, NTSE coaching',
+      title: 'Courses at Garud Classes Palwal — JEE, NEET, Foundation & Board Coaching',
+      description: 'Explore all coaching programs at Garud Classes Palwal — JEE Main & Advanced, NEET UG, Foundation (Class 8-10), Board Exam (11th-12th), NTSE & Olympiad coaching. Best courses in Palwal Haryana.',
+      keywords: 'JEE coaching Palwal, NEET coaching Palwal, foundation coaching Palwal, board exam coaching Palwal, best coaching courses Palwal, 11th 12th coaching Palwal, NTSE coaching Palwal Haryana, garud classes courses',
       courses, page: 'courses'
     });
   } catch (err) {
