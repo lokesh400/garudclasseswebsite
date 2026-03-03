@@ -11,6 +11,7 @@ const Contact = require('../models/Contact');
 const Banner = require('../models/Banner');
 const Background = require('../models/Background');
 const PopupModal = require('../models/PopupModal');
+const QuickLink = require('../models/QuickLink');
 const { cloudinary, uploaders } = require('../utils/cloudinary');
 
 // Helper: extract Cloudinary public_id from URL for deletion
@@ -335,15 +336,104 @@ router.post('/popup-modal', isAdmin, uploaders.popup.single('image'), async (req
   } catch (err) { req.flash('error', err.message); res.redirect('/admin/popup-modal'); }
 });
 
+// ─── Quick Links ──────────────────────────────────────────────────────────
+router.get('/quick-links', isAdmin, async (req, res) => {
+  try {
+    const quickLinks = await QuickLink.find().sort({ category: 1, order: 1 });
+    res.render('admin/quick-links', { title: 'Quick Links', description: '', keywords: '', quickLinks, page: 'quicklinks' });
+  } catch (err) { req.flash('error', err.message); res.redirect('/admin/dashboard'); }
+});
+router.get('/quick-links/new', isAdmin, async (req, res) => {
+  try {
+    const bannerExists = !!(await QuickLink.findOne({ category: 'banner' }));
+    res.render('admin/quick-link-form', { title: 'Add Quick Link', description: '', keywords: '', quickLink: null, bannerExists, page: 'quicklinks' });
+  } catch (err) { req.flash('error', err.message); res.redirect('/admin/quick-links'); }
+});
+router.post('/quick-links', isAdmin, async (req, res) => {
+  try {
+    const category = req.body.category === 'banner' ? 'banner' : 'basic';
+    const data = {
+      title:        req.body.title,
+      url:          req.body.url,
+      icon:         req.body.icon || 'fas fa-angle-right',
+      category,
+      order:        parseInt(req.body.order) || 0,
+      isActive:     req.body.isActive === 'true' || req.body.isActive === 'on',
+      openInNewTab: req.body.openInNewTab === 'true' || req.body.openInNewTab === 'on',
+    };
+    // Banner is limited to one — remove any existing banner before creating
+    if (category === 'banner') await QuickLink.deleteMany({ category: 'banner' });
+    await QuickLink.create(data);
+    req.flash('success', category === 'banner' ? 'Banner link saved (previous banner replaced)' : 'Quick link added');
+    res.redirect('/admin/quick-links');
+  } catch (err) { req.flash('error', err.message); res.redirect('/admin/quick-links/new'); }
+});
+router.get('/quick-links/:id/edit', isAdmin, async (req, res) => {
+  try {
+    const quickLink = await QuickLink.findById(req.params.id);
+    const bannerExists = !!(await QuickLink.findOne({ category: 'banner', _id: { $ne: req.params.id } }));
+    res.render('admin/quick-link-form', { title: 'Edit Quick Link', description: '', keywords: '', quickLink, bannerExists, page: 'quicklinks' });
+  } catch (err) { req.flash('error', err.message); res.redirect('/admin/quick-links'); }
+});
+router.put('/quick-links/:id', isAdmin, async (req, res) => {
+  try {
+    const category = req.body.category === 'banner' ? 'banner' : 'basic';
+    const data = {
+      title:        req.body.title,
+      url:          req.body.url,
+      icon:         req.body.icon || 'fas fa-angle-right',
+      category,
+      order:        parseInt(req.body.order) || 0,
+      isActive:     req.body.isActive === 'true' || req.body.isActive === 'on',
+      openInNewTab: req.body.openInNewTab === 'true' || req.body.openInNewTab === 'on',
+    };
+    // If switching to banner, remove any OTHER existing banner first
+    if (category === 'banner') await QuickLink.deleteMany({ category: 'banner', _id: { $ne: req.params.id } });
+    await QuickLink.findByIdAndUpdate(req.params.id, data);
+    req.flash('success', 'Quick link updated');
+    res.redirect('/admin/quick-links');
+  } catch (err) { req.flash('error', err.message); res.redirect('/admin/quick-links'); }
+});
+router.delete('/quick-links/:id', isAdmin, async (req, res) => {
+  try {
+    await QuickLink.findByIdAndDelete(req.params.id);
+    req.flash('success', 'Quick link deleted');
+  } catch (err) { req.flash('error', err.message); }
+  res.redirect('/admin/quick-links');
+});
+
 // ─── Contacts ──────────────────────────────────────────────────────────────
 router.get('/contacts', isAdmin, async (req, res) => {
-  const contacts = await Contact.find().sort({ createdAt: -1 });
-  await Contact.updateMany({ isRead: false }, { isRead: true });
-  res.render('admin/contacts', { title: 'Contact Messages', description: '', keywords: '', contacts, page: 'admin' });
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+    const unreadContacts = await Contact.countDocuments({ isRead: false });
+    res.render('admin/contacts', { title: 'Contact Messages', description: '', keywords: '', contacts, unreadContacts, page: 'admin' });
+  } catch (err) { req.flash('error', err.message); res.redirect('/admin/dashboard'); }
 });
+
+// Return single contact as JSON (for modal – does NOT mark as read)
+router.get('/contacts/:id/json', isAdmin, async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+    if (!contact) return res.status(404).json({ error: 'Not found' });
+    res.json(contact);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// Mark a single contact message as read
+router.post('/contacts/:id/mark-read', isAdmin, async (req, res) => {
+  try {
+    await Contact.findByIdAndUpdate(req.params.id, { isRead: true });
+    req.flash('success', 'Message marked as seen');
+  } catch (err) { req.flash('error', err.message); }
+  res.redirect('/admin/contacts');
+});
+
 router.delete('/contacts/:id', isAdmin, async (req, res) => {
-  await Contact.findByIdAndDelete(req.params.id);
-  req.flash('success', 'Message deleted');
+  try {
+    await Contact.findByIdAndDelete(req.params.id);
+    req.flash('success', 'Message deleted');
+  } catch (err) { req.flash('error', err.message); }
   res.redirect('/admin/contacts');
 });
 

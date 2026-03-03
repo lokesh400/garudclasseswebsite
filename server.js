@@ -59,12 +59,21 @@ passport.deserializeUser(Admin.deserializeUser());
 app.use(passport.initialize());
 app.use(passport.session());
 
+const QuickLink = require('./models/QuickLink');
+
 // ─── Global Locals ─────────────────────────────────────────────────────────
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   res.locals.currentUser = req.user || null;
   res.locals.siteUrl = process.env.SITE_URL || 'https://www.garudclasses.com';
+  try {
+    res.locals.basicLinks = await QuickLink.find({ isActive: true, category: 'basic' }).sort({ order: 1 }).lean();
+    res.locals.bannerLink = await QuickLink.findOne({ isActive: true, category: 'banner' }).lean() || null;
+  } catch (_) {
+    res.locals.basicLinks = [];
+    res.locals.bannerLink = null;
+  }
   next();
 });
 
@@ -77,6 +86,7 @@ app.use('/gallery', require('./routes/gallery'));
 app.use('/contact', require('./routes/contact'));
 app.use('/blog', require('./routes/blog'));
 app.use('/admin', require('./routes/admin'));
+app.use('/api/chat', require('./routes/chatbot'));
 
 // ─── Sitemap & Robots ──────────────────────────────────────────────────────
 app.get('/robots.txt', (req, res) => {

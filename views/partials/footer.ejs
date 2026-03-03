@@ -13,7 +13,7 @@
         <p>Empowering students to soar to new heights with quality education, expert guidance, and proven results. Your success is our mission.</p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.instagram.com/garudclasses/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
           <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
           <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
@@ -24,14 +24,24 @@
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="/"><i class="fas fa-angle-right"></i> Home</a></li>
-          <li><a href="/about"><i class="fas fa-angle-right"></i> About Us</a></li>
-          <li><a href="/courses"><i class="fas fa-angle-right"></i> Courses</a></li>
-          <li><a href="/faculty"><i class="fas fa-angle-right"></i> Our Faculty</a></li>
-          <li><a href="/results"><i class="fas fa-angle-right"></i> Results</a></li>
-          <li><a href="/gallery"><i class="fas fa-angle-right"></i> Gallery</a></li>
-          <li><a href="/blog"><i class="fas fa-angle-right"></i> Blog</a></li>
-          <li><a href="/contact"><i class="fas fa-angle-right"></i> Contact Us</a></li>
+          <% if (typeof basicLinks !== 'undefined' && basicLinks && basicLinks.length > 0) { %>
+            <% basicLinks.forEach(link => { %>
+            <li>
+              <a href="<%= link.url %>" <%= link.openInNewTab ? 'target="_blank" rel="noopener"' : '' %>>
+                <i class="<%= link.icon %>"></i> <%= link.title %>
+              </a>
+            </li>
+            <% }) %>
+          <% } else { %>
+            <li><a href="/"><i class="fas fa-angle-right"></i> Home</a></li>
+            <li><a href="/about"><i class="fas fa-angle-right"></i> About Us</a></li>
+            <li><a href="/courses"><i class="fas fa-angle-right"></i> Courses</a></li>
+            <li><a href="/faculty"><i class="fas fa-angle-right"></i> Our Faculty</a></li>
+            <li><a href="/results"><i class="fas fa-angle-right"></i> Results</a></li>
+            <li><a href="/gallery"><i class="fas fa-angle-right"></i> Gallery</a></li>
+            <li><a href="/blog"><i class="fas fa-angle-right"></i> Blog</a></li>
+            <li><a href="/contact"><i class="fas fa-angle-right"></i> Contact Us</a></li>
+          <% } %>
         </ul>
       </div>
 
@@ -81,6 +91,55 @@
 <button class="back-to-top" id="backToTop" aria-label="Back to top">
   <i class="fas fa-arrow-up"></i>
 </button>
+
+<!-- ── Chatbot Widget ──────────────────────────────────────── -->
+<link rel="stylesheet" href="/css/chatbot.css">
+
+<!-- Blur overlay (shown behind chat window) -->
+<div id="chatbot-overlay"></div>
+
+<!-- Toggle Button -->
+<button id="chatbot-toggle" aria-label="Open chat assistant">
+  <span class="chat-open-icon"><i class="fas fa-comments"></i></span>
+  <span class="chat-close-icon"><i class="fas fa-times"></i></span>
+  <span id="chatbot-badge"></span>
+</button>
+
+<!-- Chat Window -->
+<div id="chatbot-window" role="dialog" aria-label="Garud Classes Chat Assistant">
+  <!-- Header -->
+  <div id="chatbot-header">
+    <div class="chatbot-avatar">🦅</div>
+    <div class="chatbot-header-info">
+      <h4>Garud Assistant</h4>
+      <span><span class="online-dot"></span> Online – here to help</span>
+    </div>
+    <button id="chatbot-minimize" aria-label="Minimize chat"><i class="fas fa-minus"></i></button>
+  </div>
+
+  <!-- Quick Suggestions -->
+  <div id="chatbot-suggestions">
+    <button class="suggestion-btn" data-msg="What courses do you offer?">📚 Courses</button>
+    <button class="suggestion-btn" data-msg="How to take admission?">✅ Admission</button>
+    <button class="suggestion-btn" data-msg="What are the fees?">💰 Fees</button>
+    <button class="suggestion-btn" data-msg="What are the batch timings?">🕐 Timings</button>
+    <button class="suggestion-btn" data-msg="Contact details">📞 Contact</button>
+  </div>
+
+  <!-- Messages -->
+  <div id="chatbot-messages"></div>
+
+  <!-- Input -->
+  <div id="chatbot-input-area">
+    <textarea id="chatbot-input" placeholder="Type your message..." rows="1" maxlength="500"></textarea>
+    <button id="chatbot-send" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+  </div>
+
+  <div id="chatbot-footer">Garud Classes Virtual Assistant</div>
+</div>
+
+<script src="/js/chatbot.js"></script>
+<!-- ── End Chatbot Widget ─────────────────────────────────── -->
 
 <script src="/js/main.js"></script>
 </body>

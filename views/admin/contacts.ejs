@@ -1,25 +1,79 @@
-<%- include('partials/header', { page: 'contacts', unreadContacts: 0 }) %>
+<%- include('partials/header', { page: 'contacts', unreadContacts: unreadContacts }) %>
+
+<style>
+  .contact-row-unread { background: #fff8e1; border-left: 4px solid #f9a825; }
+  .contact-row-unread td:first-child { font-weight: 700; }
+  .status-badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:0.75rem; font-weight:600; }
+  .status-unread { background:#fff3cd; color:#856404; border:1px solid #ffc107; }
+  .status-read   { background:#d1e7dd; color:#0f5132; border:1px solid #198754; }
+  .btn-view { background:#0d6efd; color:#fff; border:none; padding:5px 12px; border-radius:6px; font-size:0.8rem; cursor:pointer; margin-right:4px; }
+  .btn-view:hover { background:#0b5ed7; }
+
+  /* Modal overlay */
+  #contactModal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:9999; align-items:center; justify-content:center; }
+  #contactModal.open { display:flex; }
+  .modal-box { background:#fff; border-radius:12px; padding:30px; max-width:600px; width:90%; max-height:85vh; overflow-y:auto; position:relative; box-shadow:0 8px 40px rgba(0,0,0,.25); }
+  .modal-close { position:absolute; top:14px; right:18px; background:none; border:none; font-size:1.4rem; cursor:pointer; color:#666; }
+  .modal-close:hover { color:#dc3545; }
+  .modal-title { font-size:1.2rem; font-weight:700; margin-bottom:18px; display:flex; align-items:center; gap:10px; }
+  .modal-field { margin-bottom:14px; }
+  .modal-label { font-size:0.78rem; text-transform:uppercase; letter-spacing:.05em; color:#888; font-weight:600; margin-bottom:3px; }
+  .modal-value { font-size:0.97rem; color:#222; word-break:break-word; }
+  .modal-message-box { background:#f8f9fa; border-radius:8px; padding:14px; line-height:1.7; white-space:pre-wrap; font-size:0.95rem; }
+  .modal-actions { display:flex; gap:10px; margin-top:22px; align-items:center; flex-wrap:wrap; }
+  .btn-mark-seen { background:#198754; color:#fff; border:none; padding:8px 20px; border-radius:8px; font-size:0.9rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; }
+  .btn-mark-seen:hover { background:#157347; }
+  .btn-delete-modal { background:#dc3545; color:#fff; border:none; padding:8px 16px; border-radius:8px; font-size:0.9rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; }
+  .btn-delete-modal:hover { background:#bb2d3b; }
+  .already-read-tag { background:#d1e7dd; color:#0f5132; border:1px solid #198754; padding:6px 14px; border-radius:8px; font-size:0.85rem; font-weight:600; }
+</style>
 
 <div class="admin-page-header">
   <h1><i class="fas fa-envelope"></i> Contact Messages</h1>
-  <span class="badge badge-primary"><%= contacts.length %> Total Messages</span>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+    <% if(unreadContacts > 0){ %>
+      <span class="status-badge status-unread"><i class="fas fa-circle-dot"></i> <%= unreadContacts %> Unread</span>
+    <% } %>
+    <span class="badge badge-primary"><%= contacts.length %> Total</span>
+  </div>
 </div>
 
 <% if (contacts && contacts.length > 0) { %>
 <div class="table-responsive">
   <table class="admin-table">
-    <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Subject</th><th>Message</th><th>Date</th><th>Action</th></tr></thead>
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Preview</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
     <tbody>
       <% contacts.forEach(c => { %>
-      <tr>
-        <td><strong><%= c.name %></strong></td>
-        <td><% if(c.phone){%><a href="tel:<%= c.phone %>"><%= c.phone %></a><%}else{%>-<%}%></td>
-        <td><% if(c.email){%><a href="mailto:<%= c.email %>"><%= c.email %></a><%}else{%>-<%}%></td>
-        <td><%= c.subject || '-' %></td>
-        <td class="msg-preview"><%= c.message?.substring(0,80) %>...</td>
-        <td><%= c.createdAt.toLocaleDateString('en-IN') %></td>
+      <tr class="<%= !c.isRead ? 'contact-row-unread' : '' %>">
         <td>
-          <form action="/admin/contacts/<%= c._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete?')">
+          <% if(!c.isRead){ %>
+            <span class="status-badge status-unread">Unread</span>
+          <% } else { %>
+            <span class="status-badge status-read">Read</span>
+          <% } %>
+        </td>
+        <td><strong><%= c.name %></strong></td>
+        <td><% if(c.phone){ %><a href="tel:<%= c.phone %>"><%= c.phone %></a><% }else{ %>-<% } %></td>
+        <td><% if(c.email){ %><a href="mailto:<%= c.email %>"><%= c.email %></a><% }else{ %>-<% } %></td>
+        <td><%= c.subject || '-' %></td>
+        <td class="msg-preview" style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><%= c.message?.substring(0,60) %>...</td>
+        <td><%= c.createdAt.toLocaleDateString('en-IN') %></td>
+        <td style="white-space:nowrap;">
+          <button class="btn-view" onclick="viewContact('<%= c._id %>')">
+            <i class="fas fa-eye"></i> View
+          </button>
+          <form action="/admin/contacts/<%= c._id %>?_method=DELETE" method="POST" style="display:inline;" onsubmit="return confirm('Delete this message?')">
             <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
           </form>
         </td>
@@ -31,5 +85,120 @@
 <% } else { %>
 <div class="empty-admin"><i class="fas fa-envelope"></i><p>No messages yet.</p></div>
 <% } %>
+
+<!-- ── Contact Detail Modal ───────────────────────────────────────────── -->
+<div id="contactModal" role="dialog" aria-modal="true" aria-labelledby="modalContactName">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()" title="Close">&times;</button>
+    <div class="modal-title">
+      <i class="fas fa-envelope-open-text" style="color:#0d6efd;"></i>
+      <span id="modalContactName">Message</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
+      <div class="modal-field">
+        <div class="modal-label">Name</div>
+        <div class="modal-value" id="mName">-</div>
+      </div>
+      <div class="modal-field">
+        <div class="modal-label">Phone</div>
+        <div class="modal-value" id="mPhone">-</div>
+      </div>
+      <div class="modal-field">
+        <div class="modal-label">Email</div>
+        <div class="modal-value" id="mEmail">-</div>
+      </div>
+      <div class="modal-field">
+        <div class="modal-label">Date</div>
+        <div class="modal-value" id="mDate">-</div>
+      </div>
+    </div>
+
+    <div class="modal-field">
+      <div class="modal-label">Subject</div>
+      <div class="modal-value" id="mSubject">-</div>
+    </div>
+
+    <div class="modal-field">
+      <div class="modal-label">Message</div>
+      <div class="modal-message-box" id="mMessage"></div>
+    </div>
+
+    <div class="modal-actions">
+      <div id="mReadStatus"></div>
+
+      <!-- Mark as Seen form (shown only if unread) -->
+      <form id="markSeenForm" action="" method="POST" style="display:none;">
+        <button type="submit" class="btn-mark-seen">
+          <i class="fas fa-check-circle"></i> Mark as Seen
+        </button>
+      </form>
+
+      <!-- Delete form -->
+      <form id="deleteForm" action="" method="POST" onsubmit="return confirm('Delete this message permanently?')">
+        <button type="submit" class="btn-delete-modal">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </form>
+
+      <button onclick="closeModal()" style="background:#6c757d;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;">
+        <i class="fas fa-times"></i> Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+async function viewContact(id) {
+  try {
+    const res = await fetch('/admin/contacts/' + id + '/json');
+    if (!res.ok) { alert('Could not load message.'); return; }
+    const c = await res.json();
+
+    document.getElementById('modalContactName').textContent = c.name || 'Message';
+    document.getElementById('mName').textContent    = c.name  || '-';
+    document.getElementById('mPhone').innerHTML     = c.phone ? '<a href="tel:'+c.phone+'">'+c.phone+'</a>' : '-';
+    document.getElementById('mEmail').innerHTML     = c.email ? '<a href="mailto:'+c.email+'">'+c.email+'</a>' : '-';
+    document.getElementById('mSubject').textContent = c.subject || '-';
+    document.getElementById('mMessage').textContent = c.message || '';
+    document.getElementById('mDate').textContent    = new Date(c.createdAt).toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+    const markForm   = document.getElementById('markSeenForm');
+    const deleteForm = document.getElementById('deleteForm');
+    const readStatus = document.getElementById('mReadStatus');
+
+    deleteForm.action = '/admin/contacts/' + id + '?_method=DELETE';
+    markForm.action   = '/admin/contacts/' + id + '/mark-read';
+
+    if (c.isRead) {
+      markForm.style.display  = 'none';
+      readStatus.innerHTML    = '<span class="already-read-tag"><i class="fas fa-check"></i> Already Seen</span>';
+    } else {
+      markForm.style.display  = '';
+      readStatus.innerHTML    = '';
+    }
+
+    document.getElementById('contactModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  } catch(e) {
+    alert('Error loading message: ' + e.message);
+  }
+}
+
+function closeModal() {
+  document.getElementById('contactModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on backdrop click
+document.getElementById('contactModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
 
 <%- include('partials/footer') %>

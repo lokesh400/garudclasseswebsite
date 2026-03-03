@@ -1,3 +1,111 @@
+<% if (typeof bannerLink !== 'undefined' && bannerLink) { %>
+<style>
+/* ── Shared color-cycle animation ── */
+@keyframes bannerColorCycle {
+  0%   { color: #fff176; }
+  16%  { color: #ff8a65; }
+  33%  { color: #80deea; }
+  50%  { color: #a5d6a7; }
+  66%  { color: #ce93d8; }
+  83%  { color: #ffcc80; }
+  100% { color: #fff176; }
+}
+@keyframes bannerBgCycle {
+  0%   { background-color: #b71c1c; }
+  16%  { background-color: #1a237e; }
+  33%  { background-color: #1b5e20; }
+  50%  { background-color: #4a148c; }
+  66%  { background-color: #e65100; }
+  83%  { background-color: #006064; }
+  100% { background-color: #b71c1c; }
+}
+
+/* ── Announcement bar (persistent strip) ── */
+.announcement-bar { background:#1a237e; padding:8px 0; text-align:center; position:relative; z-index:1100; }
+.announcement-bar a { display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-size:0.88rem; font-weight:600; letter-spacing:.03em; }
+.announcement-bar .ann-icon { color:#ffd54f; font-size:1rem; animation:bannerColorCycle 4s linear infinite; }
+.announcement-bar .ann-text { animation:bannerColorCycle 4s linear infinite; }
+.announcement-bar .ann-arrow { color:#b0bec5; font-size:0.8rem; margin-left:4px; transition:transform .2s; }
+.announcement-bar a:hover .ann-arrow { transform:translateX(4px); }
+.announcement-bar .ann-close { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; color:#90a4ae; font-size:1rem; cursor:pointer; line-height:1; }
+.announcement-bar .ann-close:hover { color:#fff; }
+
+/* ── Quick-Link Popup Modal ── */
+#qlModal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:99999; align-items:center; justify-content:center; }
+#qlModal.ql-open { display:flex; }
+.ql-box {
+  position:relative;
+  border-radius:18px;
+  overflow:hidden;
+  max-width:440px;
+  width:90%;
+  padding:40px 36px 34px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  animation:bannerBgCycle 8s linear infinite;
+}
+.ql-close-btn { position:absolute; top:12px; right:16px; background:rgba(255,255,255,.18); border:none; color:#fff; font-size:1.3rem; width:32px; height:32px; border-radius:50%; cursor:pointer; line-height:1; display:flex; align-items:center; justify-content:center; transition:background .2s; }
+.ql-close-btn:hover { background:rgba(255,255,255,.35); }
+.ql-icon { font-size:2.8rem; margin-bottom:14px; animation:bannerColorCycle 4s linear infinite; }
+.ql-heading { font-size:1.45rem; font-weight:800; line-height:1.3; margin-bottom:10px; animation:bannerColorCycle 4s linear infinite; letter-spacing:.02em; }
+.ql-sub { color:rgba(255,255,255,.82); font-size:0.9rem; margin-bottom:26px; }
+.ql-cta {
+  display:inline-flex; align-items:center; gap:8px;
+  background:#fff; border-radius:50px; padding:11px 28px;
+  font-weight:700; font-size:0.95rem; text-decoration:none;
+  color:#1a237e; transition:transform .18s, box-shadow .18s;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);
+}
+.ql-cta:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.28); }
+.ql-dismiss { display:block; margin-top:16px; color:rgba(255,255,255,.6); font-size:0.8rem; cursor:pointer; background:none; border:none; text-decoration:underline; }
+.ql-dismiss:hover { color:#fff; }
+</style>
+
+<!-- ── Quick Link Popup Modal ── -->
+<div id="qlModal" role="dialog" aria-modal="true" aria-label="Announcement">
+  <div class="ql-box">
+    <button class="ql-close-btn" id="qlCloseBtn" title="Close">&times;</button>
+    <div class="ql-icon"><i class="<%= bannerLink.icon %>"></i></div>
+    <div class="ql-heading"><%= bannerLink.title %></div>
+    <div class="ql-sub">Tap below to know more</div>
+    <a class="ql-cta" href="<%= bannerLink.url %>" <%= bannerLink.openInNewTab ? 'target="_blank" rel="noopener"' : '' %>>
+      <i class="fas fa-arrow-right"></i> View Details
+    </a>
+    <button class="ql-dismiss" id="qlDismiss">Dismiss</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'ql_banner_seen_<%= bannerLink._id %>';
+  if (!sessionStorage.getItem(KEY)) {
+    var modal = document.getElementById('qlModal');
+    modal.classList.add('ql-open');
+    document.body.style.overflow = 'hidden';
+    function closeQl() {
+      modal.classList.remove('ql-open');
+      document.body.style.overflow = '';
+      sessionStorage.setItem(KEY, '1');
+    }
+    document.getElementById('qlCloseBtn').addEventListener('click', closeQl);
+    document.getElementById('qlDismiss').addEventListener('click', closeQl);
+    modal.addEventListener('click', function(e){ if(e.target === modal) closeQl(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeQl(); });
+  }
+})();
+</script>
+
+<!-- ── Announcement Bar (persistent strip below navbar) ── -->
+<div class="announcement-bar" id="announcementBar">
+  <a href="<%= bannerLink.url %>" <%= bannerLink.openInNewTab ? 'target="_blank" rel="noopener"' : '' %>>
+    <i class="<%= bannerLink.icon %> ann-icon"></i>
+    <span class="ann-text"><%= bannerLink.title %></span>
+    <i class="fas fa-arrow-right ann-arrow"></i>
+  </a>
+  <button class="ann-close" onclick="document.getElementById('announcementBar').style.display='none'" title="Dismiss">&times;</button>
+</div>
+<% } %>
+
 <!-- Mobile-only Test Portal bar -->
 <div class="mobile-portal-bar">
   <a href="https://testportal.garudclasses.com/" target="_blank" rel="noopener noreferrer" class="mobile-portal-btn">
@@ -19,7 +127,7 @@
       <a href="https://testportal.garudclasses.com/" target="_blank" rel="noopener noreferrer" class="topbar-portal-link"><i class="fas fa-pencil-alt"></i> Test Portal</a>
       <a href="https://store.garudclasses.com" target="_blank" rel="noopener noreferrer" class="topbar-store-link"><i class="fas fa-shopping-bag"></i> Store</a>
       <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.instagram.com/garudclasses/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
       <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
     </div>
