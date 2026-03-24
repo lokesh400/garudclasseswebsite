@@ -1,0 +1,84 @@
+<%- include('partials/header', { page: 'results', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-trophy"></i> <%= result ? 'Edit' : 'Add New' %> Result</h1>
+  <a href="/admin/results" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<div class="admin-form-card">
+  <form action="<%= result ? '/admin/results/' + result._id + '?_method=PUT' : '/admin/results' %>" method="POST" enctype="multipart/form-data">
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Student Name *</label>
+        <input type="text" name="studentName" value="<%= result ? result.studentName : '' %>" required>
+      </div>
+      <div class="form-group">
+        <label>Father's Name</label>
+        <input type="text" name="fatherName" value="<%= result ? result.fatherName : '' %>">
+      </div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Exam Name * (e.g. JEE Advanced 2024)</label>
+        <input type="text" name="exam" value="<%= result ? result.exam : '' %>" required>
+      </div>
+      <div class="form-group">
+        <label>Year *</label>
+        <input type="number" name="year" value="<%= result ? result.year : new Date().getFullYear() %>" min="2000" max="2100" required>
+      </div>
+    </div>
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Rank (e.g. AIR 142)</label>
+        <input type="text" name="rank" value="<%= result ? result.rank : '' %>">
+      </div>
+      <div class="form-group">
+        <label>Score (e.g. 98.7%)</label>
+        <input type="text" name="score" value="<%= result ? result.score : '' %>">
+      </div>
+      <div class="form-group">
+        <label>Percentile</label>
+        <input type="text" name="percentile" value="<%= result ? result.percentile : '' %>">
+      </div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Category *</label>
+        <select name="category">
+          <% ['JEE','NEET','BOARD','NTSE','OLYMPIAD','OTHER'].forEach(cat => { %>
+          <option value="<%= cat %>" <%= result && result.category === cat ? 'selected' : '' %>><%= cat %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Batch</label>
+        <input type="text" name="batch" value="<%= result ? result.batch : '' %>">
+      </div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label><input type="checkbox" name="isBoardTopper" value="true" <%= result && result.isBoardTopper ? 'checked' : '' %>>&nbsp; Board Topper</label>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox" name="isStateTopper" value="true" <%= result && result.isStateTopper ? 'checked' : '' %>>&nbsp; State Topper</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Student Photo</label>
+      <input type="file" name="photo" accept="image/*">
+      <% if (result && result.photo && !result.photo.includes('default')) { %>
+      <img src="<%= result.photo %>" alt="Current Photo" class="preview-img">
+      <% } %>
+    </div>
+    <div class="form-group">
+      <label>Testimonial (optional)</label>
+      <textarea name="testimonial" rows="3"><%= result ? result.testimonial : '' %></textarea>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save"></i> <%= result ? 'Update' : 'Add' %> Result</button>
+      <a href="/admin/results" class="btn btn-outline btn-lg">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

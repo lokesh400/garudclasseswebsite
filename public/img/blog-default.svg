@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <rect width="800" height="420" fill="#f8f9fa"/>
+  <rect x="0" y="0" width="800" height="6" fill="#e63946"/>
+  <circle cx="120" cy="210" r="70" fill="#e63946" opacity=".08"/>
+  <circle cx="680" cy="210" r="70" fill="#1d3557" opacity=".08"/>
+  <text x="400" y="195" font-family="Arial, sans-serif" font-weight="900" font-size="28" fill="#1d3557" text-anchor="middle">Study Tips &amp; News</text>
+  <text x="400" y="240" font-family="Arial, sans-serif" font-size="16" fill="#718096" text-anchor="middle">Garud Classes Blog</text>
+</svg>

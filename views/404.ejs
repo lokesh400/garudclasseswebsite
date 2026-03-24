@@ -1,0 +1,51 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+
+<div class="notfound-page">
+
+  <!-- Floating background shapes -->
+  <div class="nf-bg">
+    <span class="nf-shape s1"></span>
+    <span class="nf-shape s2"></span>
+    <span class="nf-shape s3"></span>
+    <span class="nf-shape s4"></span>
+  </div>
+
+  <div class="nf-container">
+
+    <!-- Big 404 with layered text -->
+    <div class="nf-code">
+      <span class="nf-digit">4</span>
+      <span class="nf-zero">
+        <i class="fas fa-graduation-cap"></i>
+      </span>
+      <span class="nf-digit">4</span>
+    </div>
+
+    <div class="nf-content">
+      <div class="nf-tag"><i class="fas fa-triangle-exclamation"></i> Page Not Found</div>
+      <h1 class="nf-title">Oops! Looks like you took a wrong turn.</h1>
+      <p class="nf-desc">
+        The page you are looking for may have been moved, deleted, or never existed.
+        Let's get you back on track.
+      </p>
+
+      <!-- Quick links -->
+      <div class="nf-links">
+        <span class="nf-links-label">Quick Links:</span>
+        <a href="/courses"><i class="fas fa-book"></i> Courses</a>
+        <a href="/results"><i class="fas fa-trophy"></i> Results</a>
+        <a href="/faculty"><i class="fas fa-chalkboard-teacher"></i> Faculty</a>
+        <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+      </div>
+
+      <div class="nf-btns">
+        <a href="/" class="btn btn-primary btn-lg"><i class="fas fa-house"></i> Back to Home</a>
+        <a href="javascript:history.back()" class="btn btn-outline btn-lg"><i class="fas fa-arrow-left"></i> Go Back</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,36 @@
+<%- include('partials/header', { page: 'blog', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-newspaper"></i> Manage Blog</h1>
+  <a href="/admin/blog/new" class="btn btn-primary"><i class="fas fa-plus"></i> New Post</a>
+</div>
+
+<% if (blogs && blogs.length > 0) { %>
+<div class="table-responsive">
+  <table class="admin-table">
+    <thead><tr><th>Title</th><th>Category</th><th>Tags</th><th>Published</th><th>Date</th><th>Actions</th></tr></thead>
+    <tbody>
+      <% blogs.forEach(b => { %>
+      <tr>
+        <td><strong><%= b.title %></strong></td>
+        <td><%= b.category %></td>
+        <td><%= b.tags?.slice(0,3).join(', ') || '-' %></td>
+        <td><span class="badge badge-<%= b.isPublished ? 'success' : 'warning' %>"><%= b.isPublished ? 'Published' : 'Draft' %></span></td>
+        <td><%= b.createdAt.toLocaleDateString('en-IN') %></td>
+        <td class="table-actions">
+          <% if (b.isPublished) { %><a href="/blog/<%= b.slug %>" target="_blank" class="btn btn-sm btn-outline"><i class="fas fa-eye"></i></a><% } %>
+          <a href="/admin/blog/<%= b._id %>/edit" class="btn btn-sm btn-outline"><i class="fas fa-edit"></i></a>
+          <form action="/admin/blog/<%= b._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete?')">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<% } else { %>
+<div class="empty-admin"><i class="fas fa-newspaper"></i><p>No blog posts yet. <a href="/admin/blog/new">Write first post</a></p></div>
+<% } %>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,233 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+
+<style>
+  .privacy-wrap { max-width: 1100px; margin: 0 auto; }
+  .privacy-intro {
+    background: linear-gradient(135deg, rgba(26,35,126,0.08), rgba(255,152,0,0.09));
+    border: 1px solid rgba(26,35,126,0.14);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 30px;
+  }
+  .privacy-intro p { margin: 0; color: #2d3748; line-height: 1.8; }
+
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .privacy-card {
+    background: #ffffff;
+    border: 1px solid rgba(26,35,126,0.12);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .privacy-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(17, 24, 39, 0.1);
+  }
+
+  .privacy-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .privacy-num {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, #1a237e, #ff9800);
+    flex-shrink: 0;
+  }
+  .privacy-head h3 {
+    margin: 0;
+    font-size: 1.07rem;
+    color: #1a237e;
+    line-height: 1.35;
+  }
+  .privacy-card p {
+    margin: 0;
+    color: #334155;
+    line-height: 1.8;
+  }
+  .privacy-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+  }
+  .privacy-list li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 8px;
+    color: #334155;
+    line-height: 1.7;
+  }
+  .privacy-list li::before {
+    content: '\\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: #16a34a;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 0.82rem;
+  }
+
+  .privacy-contact {
+    margin-top: 26px;
+    border-radius: 16px;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    background: #f8fafc;
+    padding: 22px;
+  }
+  .privacy-contact h3 { margin-top: 0; color: #1a237e; }
+  .privacy-contact p { margin: 0 0 8px; color: #334155; }
+  .privacy-contact .policy-dates { margin-top: 12px; font-weight: 600; color: #0f172a; }
+
+  @media (max-width: 900px) {
+    .privacy-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="page-banner">
+  <div class="container">
+    <h1>Privacy <span>Policy</span></h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li class="active">Privacy Policy</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<%- include('partials/flash') %>
+
+<section class="section">
+  <div class="container privacy-wrap">
+    <div class="section-header">
+      <div class="section-badge">Legal</div>
+      <h2 class="section-title">Your Data, <span class="text-gradient">Your Rights</span></h2>
+      <p>Read this point-wise policy to know exactly what data we collect, why we collect it, and how we protect it.</p>
+    </div>
+
+    <div class="privacy-intro">
+      <p>
+        By using Garud Classes services, you agree to the practices described below. We keep this policy transparent,
+        student-focused, and easy to understand for parents and learners.
+      </p>
+    </div>
+
+    <div class="privacy-grid">
+      <div class="privacy-card">
+        <div class="privacy-head">
+          <span class="privacy-num">1</span>
+          <h3>Information We Collect</h3>
+        </div>
+        <p>When you contact us, fill forms, or inquire about admission, we may collect:</p>
+        <ul class="privacy-list">
+          <li>Name, phone number, email address, and city</li>
+          <li>Student and parent/guardian details for counseling and admission</li>
+          <li>Course preferences, academic details, and communication records</li>
+        </ul>
+      </div>
+
+      <div class="privacy-card">
+        <div class="privacy-head">
+          <span class="privacy-num">2</span>
+          <h3>How We Use Information</h3>
+        </div>
+        <p>We use your information only for educational and support purposes, including:</p>
+        <ul class="privacy-list">
+          <li>Admission guidance and counseling follow-ups</li>
+          <li>Course, batch, fee, and exam notifications</li>
+          <li>Improving website performance and support quality</li>
+          <li>Important updates on classes, tests, and announcements</li>
+        </ul>
+      </div>
+
+      <div class="privacy-card">
+        <div class="privacy-head">
+          <span class="privacy-num">3</span>
+          <h3>Cookies and Analytics</h3>
+        </div>
+        <p>Our website may use cookies and basic analytics tools to understand visitor behavior and improve usability. You can disable cookies in your browser settings, though some site features may be limited.</p>
+      </div>
+
+      <div class="privacy-card">
+        <div class="privacy-head">
+          <span class="privacy-num">4</span>
+          <h3>Data Sharing</h3>
+        </div>
+        <p>We do not sell your personal information. We may share data only when needed with trusted service providers (such as hosting or messaging tools) or when required by law.</p>
+      </div>
+
+      <div class="privacy-card">
+        <div class="privacy-head">
+          <span class="privacy-num">5</span>
+          <h3>Data Security</h3>
+        </div>
+        <p>We use reasonable technical and administrative safeguards to protect personal data from unauthorized access, misuse, or disclosure. However, no method of online transmission is 100% secure.</p>
+      </div>
+
+      <div class="privacy-card">
+        <div class="privacy-head">
+          <span class="privacy-num">6</span>
+          <h3>Your Rights</h3>
+        </div>
+        <p>You can request access, correction, or deletion of your personal information by contacting us. We will make reasonable efforts to process such requests in line with applicable laws.</p>
+      </div>
+
+      <div class="privacy-card">
+        <div class="privacy-head">
+          <span class="privacy-num">7</span>
+          <h3>Third-Party Links</h3>
+        </div>
+        <p>Our website may contain links to third-party portals, such as test portals or social pages. We are not responsible for the privacy practices of those external websites.</p>
+      </div>
+
+      <div class="privacy-card">
+        <div class="privacy-head">
+          <span class="privacy-num">8</span>
+          <h3>Children's Privacy</h3>
+        </div>
+        <p>Since we provide educational services for school students, data may be submitted by parents/guardians for admission and academic support purposes.</p>
+      </div>
+
+      <div class="privacy-card">
+        <div class="privacy-head">
+          <span class="privacy-num">9</span>
+          <h3>Policy Updates</h3>
+        </div>
+        <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with the latest effective date.</p>
+      </div>
+    </div>
+
+    <div class="privacy-contact">
+      <div class="privacy-head">
+        <span class="privacy-num">10</span>
+        <h3>Contact Us</h3>
+      </div>
+      <p>If you have questions about this policy, contact us at:</p>
+      <p>
+        Garud Classes<br>
+        Phone: <a href="tel:+919896913009">+91 98969 13009</a><br>
+        Email: <a href="mailto:info@garudclasses.com">info@garudclasses.com</a><br>
+        Website: <a href="https://www.garudclasses.com">www.garudclasses.com</a>
+      </p>
+      <p class="policy-dates">Effective Date: March 24, 2026 | Last Updated: March 24, 2026</p>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

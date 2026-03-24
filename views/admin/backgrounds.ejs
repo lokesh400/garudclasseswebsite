@@ -1,0 +1,63 @@
+<%- include('partials/header', { page: 'background', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-fill-drip"></i> Background Settings</h1>
+  <p>Manage background images and colours for each public page section.</p>
+</div>
+
+<div style="display:flex; justify-content:flex-end; margin-bottom:20px;">
+  <a href="/admin/background/new" class="btn btn-primary"><i class="fas fa-plus"></i> Add Background</a>
+</div>
+
+<% if (backgrounds && backgrounds.length > 0) { %>
+<div class="table-responsive">
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Preview</th>
+        <th>Section</th>
+        <th>Colour</th>
+        <th>Overlay</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% backgrounds.forEach(bg => { %>
+      <tr>
+        <td>
+          <% if (bg.imageUrl) { %>
+            <img src="<%= bg.imageUrl %>" class="table-img" alt="<%= bg.section %>">
+          <% } else { %>
+            <div style="width:46px;height:46px;border-radius:8px;background:<%= bg.bgColor %>;border:2px solid var(--border);"></div>
+          <% } %>
+        </td>
+        <td><strong style="text-transform:capitalize;"><%= bg.label || bg.section %></strong></td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="width:20px;height:20px;border-radius:4px;background:<%= bg.bgColor %>;border:1px solid var(--border);display:inline-block;"></span>
+            <code><%= bg.bgColor %></code>
+          </div>
+        </td>
+        <td><%= (bg.overlayOpacity * 100).toFixed(0) %>%</td>
+        <td><span class="badge badge-<%= bg.isActive ? 'success' : 'danger' %>"><%= bg.isActive ? 'Active' : 'Inactive' %></span></td>
+        <td class="table-actions">
+          <a href="/admin/background/<%= bg._id %>/edit" class="btn btn-sm btn-outline"><i class="fas fa-pen"></i> Edit</a>
+          <form action="/admin/background/<%= bg._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this background?')">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<% } else { %>
+<div class="empty-admin">
+  <i class="fas fa-fill-drip"></i>
+  <p>No background settings added yet.</p>
+  <a href="/admin/background/new">Add your first background</a>
+</div>
+<% } %>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,57 @@
+<%- include('partials/header', { page: 'blog', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-newspaper"></i> <%= blog ? 'Edit' : 'New' %> Blog Post</h1>
+  <a href="/admin/blog" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<div class="admin-form-card">
+  <form action="<%= blog ? '/admin/blog/' + blog._id + '?_method=PUT' : '/admin/blog' %>" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label>Title *</label>
+      <input type="text" name="title" value="<%= blog ? blog.title : '' %>" required>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" name="category" value="<%= blog ? blog.category : 'General' %>">
+      </div>
+      <div class="form-group">
+        <label>Tags (comma separated)</label>
+        <input type="text" name="tags" value="<%= blog ? blog.tags?.join(', ') : '' %>" placeholder="JEE, NEET, Tips">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Excerpt (short summary)</label>
+      <textarea name="excerpt" rows="2"><%= blog ? blog.excerpt : '' %></textarea>
+    </div>
+    <div class="form-group">
+      <label>Content * (HTML supported)</label>
+      <textarea name="content" rows="15" id="blogContent"><%= blog ? blog.content : '' %></textarea>
+    </div>
+    <div class="form-group">
+      <label>Meta Description (for SEO)</label>
+      <textarea name="metaDescription" rows="2"><%= blog ? blog.metaDescription : '' %></textarea>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Featured Image</label>
+        <input type="file" name="image" accept="image/*">
+        <% if (blog && blog.image) { %><img src="<%= blog.image %>" alt="" class="preview-img"><% } %>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select name="isPublished">
+          <option value="false" <%= !blog || !blog.isPublished ? 'selected' : '' %>>Save as Draft</option>
+          <option value="true" <%= blog && blog.isPublished ? 'selected' : '' %>>Publish Now</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save"></i> <%= blog ? 'Update' : 'Save' %> Post</button>
+      <a href="/admin/blog" class="btn btn-outline btn-lg">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

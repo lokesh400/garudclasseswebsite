@@ -1,0 +1,12 @@
+<% if (success && success.length > 0) { %>
+  <div class="alert alert-success">
+    <i class="fas fa-check-circle"></i> <%= success[0] %>
+    <button class="alert-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+  </div>
+<% } %>
+<% if (error && error.length > 0) { %>
+  <div class="alert alert-error">
+    <i class="fas fa-exclamation-circle"></i> <%= error[0] %>
+    <button class="alert-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+  </div>
+<% } %>

@@ -1,0 +1,53 @@
+<%- include('partials/header', { page: 'gallery', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-images"></i> Manage Gallery</h1>
+</div>
+
+<!-- Upload Form -->
+<div class="admin-form-card">
+  <h3>Upload New Photo</h3>
+  <form action="/admin/gallery" method="POST" enctype="multipart/form-data">
+    <div class="form-grid-3">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" name="title" placeholder="Photo title">
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select name="category">
+          <% ['CLASSROOM','EVENT','RESULT','FACULTY','INFRASTRUCTURE','OTHER'].forEach(c => { %>
+          <option value="<%= c %>"><%= c.charAt(0)+c.slice(1).toLowerCase() %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Image *</label>
+        <input type="file" name="image" accept="image/*" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Upload Photo</button>
+  </form>
+</div>
+
+<!-- Gallery Grid -->
+<% if (items && items.length > 0) { %>
+<div class="admin-gallery-grid">
+  <% items.forEach(item => { %>
+  <div class="admin-gallery-item">
+    <img src="<%= item.image %>" alt="<%= item.title %>">
+    <div class="agi-overlay">
+      <span class="badge badge-primary"><%= item.category %></span>
+      <form action="/admin/gallery/<%= item._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete?')">
+        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+      </form>
+    </div>
+    <% if (item.title) { %><p><%= item.title %></p><% } %>
+  </div>
+  <% }) %>
+</div>
+<% } else { %>
+<div class="empty-admin"><i class="fas fa-images"></i><p>No images yet.</p></div>
+<% } %>
+
+<%- include('partials/footer') %>

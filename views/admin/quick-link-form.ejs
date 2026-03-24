@@ -1,0 +1,107 @@
+<%- include('partials/header', { page: 'quicklinks', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <div>
+    <h1><i class="fas fa-link"></i> <%= quickLink ? 'Edit' : 'Add' %> Quick Link</h1>
+    <p><%= quickLink ? 'Update the details for this link' : 'Add a new link to the website footer' %></p>
+  </div>
+  <a href="/admin/quick-links" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<div class="admin-form-card">
+  <form action="<%= quickLink ? '/admin/quick-links/' + quickLink._id + '?_method=PUT' : '/admin/quick-links' %>" method="POST">
+
+    <!-- Category selector -->
+    <div class="form-group" style="margin-bottom:20px;">
+      <label class="form-label">Category <span style="color:red">*</span></label>
+      <div style="display:flex;gap:16px;margin-top:6px;">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:500;padding:10px 18px;border:2px solid #dee2e6;border-radius:8px;transition:all .2s;" id="lbl-basic">
+          <input type="radio" name="category" value="basic"
+                 <%= (!quickLink || quickLink.category === 'basic') ? 'checked' : '' %>
+                 onchange="toggleCategoryInfo(this.value)">
+          <i class="fas fa-link" style="color:#0d6efd;"></i> Basic
+          <small style="color:#888;font-weight:400;">— appears in footer Quick Links</small>
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:500;padding:10px 18px;border:2px solid #dee2e6;border-radius:8px;transition:all .2s;" id="lbl-banner">
+          <input type="radio" name="category" value="banner"
+                 <%= (quickLink && quickLink.category === 'banner') ? 'checked' : '' %>
+                 onchange="toggleCategoryInfo(this.value)">
+          <i class="fas fa-bullhorn" style="color:#e65100;"></i> Banner
+          <small style="color:#888;font-weight:400;">— top announcement bar (max 1)</small>
+        </label>
+      </div>
+      <div id="bannerWarning" style="display:<%= (quickLink && quickLink.category === 'banner') || bannerExists ? '' : 'none' %>;margin-top:10px;padding:10px 14px;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;color:#856404;font-size:0.87rem;">
+        <i class="fas fa-triangle-exclamation"></i>
+        <% if(bannerExists && (!quickLink || quickLink.category !== 'banner')){ %>
+          A banner link already exists. Saving as <strong>Banner</strong> will <strong>replace</strong> the existing one.
+        <% } else { %>
+          Only <strong>one</strong> banner link is allowed. It will appear in the animated announcement bar at the top of the website.
+        <% } %>
+      </div>
+    </div>
+
+    <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div class="form-group">
+        <label class="form-label">Link Title <span style="color:red">*</span></label>
+        <input type="text" name="title" class="form-control" required
+               value="<%= quickLink ? quickLink.title : '' %>"
+               placeholder="e.g. Home, About Us, Courses">
+      </div>
+      <div class="form-group">
+        <label class="form-label">URL <span style="color:red">*</span></label>
+        <input type="text" name="url" class="form-control" required
+               value="<%= quickLink ? quickLink.url : '' %>"
+               placeholder="e.g. /about or https://example.com">
+      </div>
+    </div>
+
+    <script>
+    function toggleCategoryInfo(val) {
+      const w = document.getElementById('bannerWarning');
+      w.style.display = (val === 'banner') ? '' : 'none';
+    }
+    </script>
+
+    <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+      <div class="form-group">
+        <label class="form-label">Icon <small style="color:#888;">(Font Awesome class)</small></label>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="text" name="icon" id="iconInput" class="form-control"
+                 value="<%= quickLink ? quickLink.icon : 'fas fa-angle-right' %>"
+                 placeholder="fas fa-angle-right"
+                 oninput="document.getElementById('iconPreview').className=this.value">
+          <i id="iconPreview" class="<%= quickLink ? quickLink.icon : 'fas fa-angle-right' %>"
+             style="font-size:1.4rem;width:30px;text-align:center;color:var(--primary);"></i>
+        </div>
+        <small style="color:#888;">Find icons at <a href="https://fontawesome.com/icons" target="_blank">fontawesome.com/icons</a></small>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Display Order</label>
+        <input type="number" name="order" class="form-control" min="0"
+               value="<%= quickLink ? quickLink.order : 0 %>"
+               placeholder="0 = first">
+      </div>
+      <div class="form-group" style="display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding-bottom:4px;">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:500;">
+          <input type="checkbox" name="isActive" value="true"
+                 <%= (!quickLink || quickLink.isActive) ? 'checked' : '' %>>
+          Active (show on website)
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:500;">
+          <input type="checkbox" name="openInNewTab" value="true"
+                 <%= (quickLink && quickLink.openInNewTab) ? 'checked' : '' %>>
+          Open in new tab
+        </label>
+      </div>
+    </div>
+
+    <div style="margin-top:8px;">
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-save"></i> <%= quickLink ? 'Update Link' : 'Save Link' %>
+      </button>
+      <a href="/admin/quick-links" class="btn btn-outline" style="margin-left:10px;">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

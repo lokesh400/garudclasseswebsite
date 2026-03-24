@@ -1,0 +1,47 @@
+<%- include('partials/head') %>
+<%- include('partials/navbar') %>
+
+<section class="page-banner">
+  <div class="container">
+    <h1>Our <span>Blog</span></h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb"><li><a href="/">Home</a></li><li class="active">Blog</li></ol>
+    </nav>
+  </div>
+</section>
+
+<%- include('partials/flash') %>
+
+<section class="section">
+  <div class="container">
+    <% if (blogs && blogs.length > 0) { %>
+    <div class="blog-full-grid">
+      <% blogs.forEach((b, i) => { %>
+      <div class="blog-card" data-aos="fade-up" data-aos-delay="<%= (i%3)*100 %>">
+        <div class="blog-img">
+          <img src="<%= b.image || '/img/blog-default.jpg' %>" alt="<%= b.title %>" loading="lazy">
+          <span class="blog-cat"><%= b.category %></span>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span><i class="fas fa-calendar"></i> <%= b.publishedAt?.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }) %></span>
+            <% if (b.tags && b.tags.length > 0) { %><span><i class="fas fa-tag"></i> <%= b.tags.slice(0,2).join(', ') %></span><% } %>
+          </div>
+          <h3><a href="/blog/<%= b.slug %>"><%= b.title %></a></h3>
+          <p><%= b.excerpt || b.content?.substring(0,150) + '...' %></p>
+          <a href="/blog/<%= b.slug %>" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <% } else { %>
+    <div class="empty-state">
+      <i class="fas fa-newspaper"></i>
+      <h3>Blog Posts Coming Soon</h3>
+      <p>We're working on useful study tips and articles. Check back soon!</p>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

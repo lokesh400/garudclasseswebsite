@@ -1,0 +1,147 @@
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container footer-grid">
+      <!-- Brand -->
+      <div class="footer-col footer-brand">
+        <div class="footer-logo">
+          <img src="/img/logo.png" alt="Garud Classes Logo" class="logo-img logo-img-footer">
+          <div class="logo-text">
+            <span class="logo-main">GARUD</span>
+            <span class="logo-sub">CLASSES</span>
+          </div>
+        </div>
+        <p>Empowering students to soar to new heights with quality education, expert guidance, and proven results. Your success is our mission.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/garudclasses/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <% if (typeof basicLinks !== 'undefined' && basicLinks && basicLinks.length > 0) { %>
+            <% basicLinks.forEach(link => { %>
+            <li>
+              <a href="<%= link.url %>" <%= link.openInNewTab ? 'target="_blank" rel="noopener"' : '' %>>
+                <i class="<%= link.icon %>"></i> <%= link.title %>
+              </a>
+            </li>
+            <% }) %>
+          <% } else { %>
+            <li><a href="/"><i class="fas fa-angle-right"></i> Home</a></li>
+            <li><a href="/about"><i class="fas fa-angle-right"></i> About Us</a></li>
+            <li><a href="/courses"><i class="fas fa-angle-right"></i> Courses</a></li>
+            <li><a href="/faculty"><i class="fas fa-angle-right"></i> Our Faculty</a></li>
+            <li><a href="/results"><i class="fas fa-angle-right"></i> Results</a></li>
+            <li><a href="/gallery"><i class="fas fa-angle-right"></i> Gallery</a></li>
+            <li><a href="/blog"><i class="fas fa-angle-right"></i> Blog</a></li>
+            <li><a href="/contact"><i class="fas fa-angle-right"></i> Contact Us</a></li>
+            <li><a href="/privacy-policy"><i class="fas fa-angle-right"></i> Privacy Policy</a></li>
+          <% } %>
+        </ul>
+      </div>
+
+      <!-- Courses Links -->
+      <div class="footer-col">
+        <h4>Our Courses</h4>
+        <ul>
+          <li><a href="/courses#jee"><i class="fas fa-angle-right"></i> JEE Main & Advanced</a></li>
+          <li><a href="/courses#neet"><i class="fas fa-angle-right"></i> NEET UG</a></li>
+          <li><a href="/courses#foundation"><i class="fas fa-angle-right"></i> Foundation (Class 8-10)</a></li>
+          <li><a href="/courses#board"><i class="fas fa-angle-right"></i> Board Exam Prep</a></li>
+          <li><a href="/courses#ntse"><i class="fas fa-angle-right"></i> NTSE Coaching</a></li>
+          <li><a href="/courses#olympiad"><i class="fas fa-angle-right"></i> Olympiad Training</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-map-marker-alt"></i> Your Institute Address, City, State - PINCODE</li>
+          <li><i class="fas fa-phone"></i> <a href="tel:+919896913009">+91 98969 13009</a></li>
+          <li><i class="fas fa-envelope"></i> <a href="mailto:info@garudclasses.com">info@garudclasses.com</a></li>
+          <li><i class="fas fa-globe"></i> <a href="https://www.garudclasses.com">www.garudclasses.com</a></li>
+        </ul>
+        <a href="https://wa.me/919896913009" class="whatsapp-btn" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>&copy; <%= new Date().getFullYear() %> Garud Classes. All Rights Reserved.</p>
+      <p><a href="/privacy-policy">Privacy Policy</a> | Designed with <i class="fas fa-heart" style="color:#e74c3c"></i> for academic excellence.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float Button -->
+<a href="https://wa.me/919896913009" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ── Chatbot Widget ──────────────────────────────────────── -->
+<link rel="stylesheet" href="/css/chatbot.css">
+
+<!-- Blur overlay (shown behind chat window) -->
+<div id="chatbot-overlay"></div>
+
+<!-- Toggle Button -->
+<button id="chatbot-toggle" aria-label="Open chat assistant">
+  <span class="chat-open-icon"><i class="fas fa-comments"></i></span>
+  <span class="chat-close-icon"><i class="fas fa-times"></i></span>
+  <span id="chatbot-badge"></span>
+</button>
+
+<!-- Chat Window -->
+<div id="chatbot-window" role="dialog" aria-label="Garud Classes Chat Assistant">
+  <!-- Header -->
+  <div id="chatbot-header">
+    <div class="chatbot-avatar">🦅</div>
+    <div class="chatbot-header-info">
+      <h4>Garud Assistant</h4>
+      <span><span class="online-dot"></span> Online – here to help</span>
+    </div>
+    <button id="chatbot-minimize" aria-label="Minimize chat"><i class="fas fa-minus"></i></button>
+  </div>
+
+  <!-- Quick Suggestions -->
+  <div id="chatbot-suggestions">
+    <button class="suggestion-btn" data-msg="What courses do you offer?">📚 Courses</button>
+    <button class="suggestion-btn" data-msg="How to take admission?">✅ Admission</button>
+    <button class="suggestion-btn" data-msg="What are the fees?">💰 Fees</button>
+    <button class="suggestion-btn" data-msg="What are the batch timings?">🕐 Timings</button>
+    <button class="suggestion-btn" data-msg="Contact details">📞 Contact</button>
+  </div>
+
+  <!-- Messages -->
+  <div id="chatbot-messages"></div>
+
+  <!-- Input -->
+  <div id="chatbot-input-area">
+    <textarea id="chatbot-input" placeholder="Type your message..." rows="1" maxlength="500"></textarea>
+    <button id="chatbot-send" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+  </div>
+
+  <div id="chatbot-footer">Garud Classes Virtual Assistant</div>
+</div>
+
+<script src="/js/chatbot.js"></script>
+<!-- ── End Chatbot Widget ─────────────────────────────────── -->
+
+<script src="/js/main.js"></script>
+</body>
+</html>

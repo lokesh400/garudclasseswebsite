@@ -1,0 +1,81 @@
+<%- include('partials/header', { page: 'courses', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-book"></i> <%= course ? 'Edit' : 'Add' %> Course</h1>
+  <a href="/admin/courses" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<div class="admin-form-card">
+  <form action="<%= course ? '/admin/courses/' + course._id + '?_method=PUT' : '/admin/courses' %>" method="POST" enctype="multipart/form-data">
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Course Name *</label>
+        <input type="text" name="name" value="<%= course ? course.name : '' %>" required>
+      </div>
+      <div class="form-group">
+        <label>Category *</label>
+        <select name="category">
+          <% ['JEE','NEET','FOUNDATION','BOARD','NTSE','OLYMPIAD','OTHER'].forEach(cat => { %>
+          <option value="<%= cat %>" <%= course && course.category === cat ? 'selected' : '' %>><%= cat %></option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Icon (Font Awesome class)</label>
+        <input type="text" name="icon" value="<%= course ? course.icon : 'fas fa-book' %>" placeholder="fas fa-atom">
+      </div>
+      <div class="form-group">
+        <label>Duration</label>
+        <input type="text" name="duration" value="<%= course ? course.duration : '' %>" placeholder="e.g. 2 Years">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Short Description (for cards)</label>
+      <input type="text" name="shortDesc" value="<%= course ? course.shortDesc : '' %>">
+    </div>
+    <div class="form-group">
+      <label>Full Description</label>
+      <textarea name="description" rows="5"><%= course ? course.description : '' %></textarea>
+    </div>
+    <div class="form-group">
+      <label>Features (one per line)</label>
+      <textarea name="features" rows="5"><%= course ? course.features?.join('\n') : '' %></textarea>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Eligibility</label>
+        <input type="text" name="eligibility" value="<%= course ? course.eligibility : '' %>">
+      </div>
+      <div class="form-group">
+        <label>Fee</label>
+        <input type="text" name="fee" value="<%= course ? course.fee : '' %>">
+      </div>
+    </div>
+    <div class="form-grid-2">
+      <div class="form-group">
+        <label>Banner Image</label>
+        <input type="file" name="banner" accept="image/*">
+        <% if (course && course.banner) { %><img src="<%= course.banner %>" alt="" class="preview-img"><% } %>
+      </div>
+      <div class="form-group">
+        <label>Display Order</label>
+        <input type="number" name="order" value="<%= course ? course.order : 0 %>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Status</label>
+      <select name="isActive">
+        <option value="true" <%= !course || course.isActive ? 'selected' : '' %>>Active</option>
+        <option value="false" <%= course && !course.isActive ? 'selected' : '' %>>Inactive</option>
+      </select>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save"></i> <%= course ? 'Update' : 'Add' %> Course</button>
+      <a href="/admin/courses" class="btn btn-outline btn-lg">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

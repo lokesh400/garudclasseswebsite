@@ -1,0 +1,38 @@
+<%- include('partials/header', { page: 'results', unreadContacts: 0 }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-trophy"></i> Manage Results</h1>
+  <a href="/admin/results/new" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Result</a>
+</div>
+
+<% if (results && results.length > 0) { %>
+<div class="table-responsive">
+  <table class="admin-table">
+    <thead>
+      <tr><th>Photo</th><th>Student</th><th>Exam</th><th>Rank/Score</th><th>Year</th><th>Category</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <% results.forEach(r => { %>
+      <tr>
+        <td><img src="<%= r.photo || '/img/default-student.png' %>" alt="" class="table-img"></td>
+        <td><strong><%= r.studentName %></strong><br><small><%= r.fatherName || '' %></small></td>
+        <td><%= r.exam %></td>
+        <td><%= r.rank || '' %> <%= r.score || '' %> <% if (r.percentile) { %><%= r.percentile %>%ile<% } %></td>
+        <td><%= r.year %></td>
+        <td><span class="badge badge-primary"><%= r.category %></span></td>
+        <td class="table-actions">
+          <a href="/admin/results/<%= r._id %>/edit" class="btn btn-sm btn-outline"><i class="fas fa-edit"></i></a>
+          <form action="/admin/results/<%= r._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this result?')">
+            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<% } else { %>
+<div class="empty-admin"><i class="fas fa-trophy"></i><p>No results yet. <a href="/admin/results/new">Add first result</a></p></div>
+<% } %>
+
+<%- include('partials/footer') %>

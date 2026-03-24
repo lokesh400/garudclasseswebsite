@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png?v=2">
+  <link rel="shortcut icon" href="/img/favicon.ico?v=2">
+  <link rel="apple-touch-icon" href="/img/favicon.png?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body class="admin-body">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-logo">
+      <img src="/img/logo.png" alt="Garud Classes Logo" class="logo-img logo-img-admin">
+      <div class="logo-text">
+        <span class="logo-main">GARUD</span>
+        <span class="logo-sub">CLASSES</span>
+      </div>
+      <button class="sidebar-close-btn" id="sidebarCloseBtn"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/admin/dashboard" class="<%= page === 'dashboard' ? 'active' : '' %>"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="/admin/results" class="<%= page === 'results' ? 'active' : '' %>"><i class="fas fa-trophy"></i> Results</a>
+      <a href="/admin/faculty" class="<%= page === 'faculty' ? 'active' : '' %>"><i class="fas fa-chalkboard-teacher"></i> Faculty</a>
+      <a href="/admin/courses" class="<%= page === 'courses' ? 'active' : '' %>"><i class="fas fa-book"></i> Courses</a>
+      <a href="/admin/banners" class="<%= page === 'banners' ? 'active' : '' %>"><i class="fas fa-images"></i> Banners</a>
+      <a href="/admin/background" class="<%= page === 'background' ? 'active' : '' %>"><i class="fas fa-fill-drip"></i> Background</a>
+      <a href="/admin/popup-modal" class="<%= page === 'popup' ? 'active' : '' %>"><i class="fas fa-window-restore"></i> Popup Modal</a>
+      <a href="/admin/gallery" class="<%= page === 'gallery' ? 'active' : '' %>"><i class="fas fa-photo-film"></i> Gallery</a>
+      <a href="/admin/blog" class="<%= page === 'blog' ? 'active' : '' %>"><i class="fas fa-newspaper"></i> Blog</a>
+      <a href="/admin/contacts" class="<%= page === 'contacts' ? 'active' : '' %>"><i class="fas fa-envelope"></i> Messages
+        <% if (typeof unreadContacts !== 'undefined' && unreadContacts > 0) { %><span class="badge"><%= unreadContacts %></span><% } %>
+      </a>
+      <a href="/admin/quick-links" class="<%= page === 'quicklinks' ? 'active' : '' %>"><i class="fas fa-link"></i> Quick Links</a>
+      <div class="sidebar-divider"></div>
+      <a href="/" target="_blank"><i class="fas fa-globe"></i> View Site</a>
+      <a href="/admin/logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="admin-main" id="adminMain">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-right">
+        <span><i class="fas fa-user-shield"></i> Admin</span>
+        <a href="/admin/logout" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="admin-content">
+      <%- include('../../partials/flash') %>

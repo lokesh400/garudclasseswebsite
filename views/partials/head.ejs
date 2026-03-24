@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- ── SEO Meta Tags ── -->
+  <title><%= locals.title || 'Garud Classes - Excellence in Education' %></title>
+  <meta name="description" content="<%= locals.description || 'Garud Classes - Premier coaching for JEE, NEET, Board Exams, NTSE and Olympiads.' %>">
+  <meta name="keywords" content="<%= locals.keywords || 'coaching institute, JEE, NEET, board exams, Garud Classes' %>">
+  <meta name="author" content="Garud Classes">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="<%= siteUrl %><%= locals.currentPath || '' %>">
+
+  <!-- ── Open Graph ── -->
+  <meta property="og:title" content="<%= locals.title || 'Garud Classes' %>">
+  <meta property="og:description" content="<%= locals.description || 'Garud Classes - Premier coaching institute.' %>">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= siteUrl %>">
+  <meta property="og:image" content="<%= siteUrl %>/img/og-image.jpg">
+  <meta property="og:site_name" content="Garud Classes">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- ── Twitter Card ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= locals.title || 'Garud Classes' %>">
+  <meta name="twitter:description" content="<%= locals.description || 'Premier coaching institute for JEE, NEET and Board Exams.' %>">
+  <meta name="twitter:image" content="<%= siteUrl %>/img/og-image.jpg">
+
+  <!-- ── Favicon ── -->
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png?v=2">
+  <link rel="shortcut icon" href="/img/favicon.ico?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.png?v=2">
+
+  <!-- ── Fonts & Icons ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- ── Styles ── -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ── Geo Meta (Palwal, Haryana) ── -->
+  <meta name="geo.region" content="IN-HR">
+  <meta name="geo.placename" content="Palwal, Haryana, India">
+  <meta name="geo.position" content="28.1522;77.3219">
+  <meta name="ICBM" content="28.1522, 77.3219">
+
+  <!-- ── JSON-LD Structured Data ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["EducationalOrganization", "LocalBusiness"],
+    "name": "Garud Classes",
+    "alternateName": ["Garud Classes Palwal", "Best Coaching Institute Palwal"],
+    "url": "<%= siteUrl %>",
+    "logo": "<%= siteUrl %>/img/logo.png",
+    "image": "<%= siteUrl %>/img/og-image.jpg",
+    "description": "Garud Classes is the No. 1 coaching institute in Palwal, Haryana offering expert coaching for JEE Main & Advanced, NEET UG, Foundation, Board Exams, NTSE and Olympiads.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Palwal",
+      "addressLocality": "Palwal",
+      "addressRegion": "Haryana",
+      "postalCode": "121102",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 28.1522,
+      "longitude": 77.3219
+    },
+    "telephone": "+919896913009",
+    "email": "info@garudclasses.com",
+    "priceRange": "₹₹",
+    "openingHours": "Mo-Sa 07:00-20:00",
+    "areaServed": ["Palwal", "Faridabad", "Ballabhgarh", "Hodal", "Hathin", "Haryana", "NCR"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Coaching Programs",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "JEE Main & Advanced Coaching Palwal" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "NEET UG Coaching Palwal" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "Foundation Coaching Class 8-10 Palwal" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "Board Exam Coaching 11th 12th Palwal" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "NTSE Coaching Palwal" } }
+      ]
+    },
+    "sameAs": [
+      "https://www.garudclasses.com",
+      "https://www.instagram.com/garudclasses/"
+    ]
+  }
+  </script>
+</head>
+<body>

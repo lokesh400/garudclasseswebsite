@@ -1,0 +1,120 @@
+<%- include('partials/header', { page: 'dashboard', unreadContacts: unreadContacts }) %>
+
+<div class="admin-page-header">
+  <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+  <p>Welcome back, Admin! Here's an overview of your website.</p>
+</div>
+
+<!-- Stats Cards -->
+<div class="admin-stats-grid">
+  <div class="admin-stat-card stat-blue">
+    <div class="asc-icon"><i class="fas fa-trophy"></i></div>
+    <div class="asc-info"><h3><%= resultsCount %></h3><p>Total Results</p></div>
+    <a href="/admin/results" class="asc-link">Manage <i class="fas fa-arrow-right"></i></a>
+  </div>
+  <div class="admin-stat-card stat-green">
+    <div class="asc-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+    <div class="asc-info"><h3><%= facultyCount %></h3><p>Active Faculty</p></div>
+    <a href="/admin/faculty" class="asc-link">Manage <i class="fas fa-arrow-right"></i></a>
+  </div>
+  <div class="admin-stat-card stat-orange">
+    <div class="asc-icon"><i class="fas fa-book"></i></div>
+    <div class="asc-info"><h3><%= coursesCount %></h3><p>Active Courses</p></div>
+    <a href="/admin/courses" class="asc-link">Manage <i class="fas fa-arrow-right"></i></a>
+  </div>
+  <div class="admin-stat-card stat-red">
+    <div class="asc-icon"><i class="fas fa-envelope"></i></div>
+    <div class="asc-info"><h3><%= unreadContacts %></h3><p>Unread Messages</p></div>
+    <a href="/admin/contacts" class="asc-link">View <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="admin-quick-actions">
+  <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+  <div class="qa-grid">
+    <a href="/admin/results/new" class="qa-btn"><i class="fas fa-plus"></i> Add Result</a>
+    <a href="/admin/faculty/new" class="qa-btn"><i class="fas fa-plus"></i> Add Faculty</a>
+    <a href="/admin/courses/new" class="qa-btn"><i class="fas fa-plus"></i> Add Course</a>
+    <a href="/admin/gallery" class="qa-btn"><i class="fas fa-image"></i> Add Photo</a>
+    <a href="/admin/blog/new" class="qa-btn"><i class="fas fa-pen"></i> New Blog Post</a>
+    <a href="/" target="_blank" class="qa-btn"><i class="fas fa-eye"></i> View Website</a>
+  </div>
+</div>
+
+<!-- Quick Links: Public Pages -->
+<div class="admin-quick-links">
+  <h2><i class="fas fa-link"></i> Quick Links</h2>
+  <div class="ql-grid">
+    <a href="/" target="_blank" class="ql-card">
+      <div class="ql-icon" style="background:linear-gradient(135deg,#e63946,#c1121f);"><i class="fas fa-house"></i></div>
+      <div class="ql-info"><strong>Home</strong><span>Main landing page</span></div>
+      <i class="fas fa-arrow-up-right-from-square ql-ext"></i>
+    </a>
+    <a href="/about" target="_blank" class="ql-card">
+      <div class="ql-icon" style="background:linear-gradient(135deg,#1d3557,#457b9d);"><i class="fas fa-circle-info"></i></div>
+      <div class="ql-info"><strong>About Us</strong><span>Institute overview</span></div>
+      <i class="fas fa-arrow-up-right-from-square ql-ext"></i>
+    </a>
+    <a href="/courses" target="_blank" class="ql-card">
+      <div class="ql-icon" style="background:linear-gradient(135deg,#2a9d8f,#1d7a6e);"><i class="fas fa-book"></i></div>
+      <div class="ql-info"><strong>Courses</strong><span>All programmes</span></div>
+      <i class="fas fa-arrow-up-right-from-square ql-ext"></i>
+    </a>
+    <a href="/results" target="_blank" class="ql-card">
+      <div class="ql-icon" style="background:linear-gradient(135deg,#f4a261,#e76f51);"><i class="fas fa-trophy"></i></div>
+      <div class="ql-info"><strong>Results</strong><span>Student toppers</span></div>
+      <i class="fas fa-arrow-up-right-from-square ql-ext"></i>
+    </a>
+    <a href="/faculty" target="_blank" class="ql-card">
+      <div class="ql-icon" style="background:linear-gradient(135deg,#6a4c93,#9b5de5);"><i class="fas fa-chalkboard-teacher"></i></div>
+      <div class="ql-info"><strong>Faculty</strong><span>Teaching staff</span></div>
+      <i class="fas fa-arrow-up-right-from-square ql-ext"></i>
+    </a>
+    <a href="/gallery" target="_blank" class="ql-card">
+      <div class="ql-icon" style="background:linear-gradient(135deg,#0077b6,#00b4d8);"><i class="fas fa-images"></i></div>
+      <div class="ql-info"><strong>Gallery</strong><span>Photo gallery</span></div>
+      <i class="fas fa-arrow-up-right-from-square ql-ext"></i>
+    </a>
+    <a href="/blog" target="_blank" class="ql-card">
+      <div class="ql-icon" style="background:linear-gradient(135deg,#3a86ff,#0043ff);"><i class="fas fa-newspaper"></i></div>
+      <div class="ql-info"><strong>Blog</strong><span>Latest articles</span></div>
+      <i class="fas fa-arrow-up-right-from-square ql-ext"></i>
+    </a>
+    <a href="/contact" target="_blank" class="ql-card">
+      <div class="ql-icon" style="background:linear-gradient(135deg,#d62828,#a4161a);"><i class="fas fa-envelope"></i></div>
+      <div class="ql-info"><strong>Contact</strong><span>Enquiry page</span></div>
+      <i class="fas fa-arrow-up-right-from-square ql-ext"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Recent Messages -->
+<div class="admin-recent-messages">
+  <div class="arm-header">
+    <h2><i class="fas fa-envelope"></i> Recent Messages</h2>
+    <a href="/admin/contacts" class="btn btn-sm btn-primary">View All</a>
+  </div>
+  <% if (recentContacts && recentContacts.length > 0) { %>
+  <div class="table-responsive">
+    <table class="admin-table">
+      <thead><tr><th>Name</th><th>Phone</th><th>Subject</th><th>Date</th><th>Status</th></tr></thead>
+      <tbody>
+        <% recentContacts.forEach(c => { %>
+        <tr>
+          <td><strong><%= c.name %></strong></td>
+          <td><%= c.phone || '-' %></td>
+          <td><%= c.subject || '-' %></td>
+          <td><%= c.createdAt.toLocaleDateString('en-IN') %></td>
+          <td><span class="badge badge-<%= c.isRead ? 'success' : 'warning' %>"><%= c.isRead ? 'Read' : 'Unread' %></span></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } else { %>
+  <p class="no-data">No messages yet.</p>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>
