@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Apply - <%= recruitment.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --ink: #0f172a;
+      --surface: #f8fafc;
+      --primary: #0f766e;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(15, 118, 110, 0.18), transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.18), transparent 45%),
+        var(--surface);
+      min-height: 100vh;
+    }
+
+    h1, h2 {
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .rise-in {
+      animation: riseIn 0.45s ease forwards;
+    }
+  </style>
+</head>
+
+<body class="px-4 py-10">
+  <div class="max-w-4xl mx-auto rise-in">
+    <a href="/recruitments/<%= recruitment._id %>" class="inline-flex items-center gap-2 text-teal-700 text-sm font-semibold hover:underline">Back to role details</a>
+
+    <div class="mt-4 bg-white rounded-2xl border border-slate-200 shadow-xl p-6 md:p-8">
+      <div class="mb-8">
+        <p class="text-xs uppercase tracking-[0.2em] font-bold text-teal-700">Application Form</p>
+        <h1 class="text-2xl md:text-4xl font-extrabold mt-3">Apply for <%= recruitment.title %></h1>
+        <p class="text-slate-600 mt-3">Fill out the details below. Our recruitment team will contact shortlisted candidates.</p>
+      </div>
+
+      <div class="mb-6 rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-700">
+        <p><strong>Department:</strong> <%= recruitment.department || 'General' %></p>
+        <p><strong>Location:</strong> <%= recruitment.location || 'Not specified' %></p>
+      </div>
+
+      <form
+        action="/recruitments/<%= recruitment._id %>/apply"
+        method="POST"
+        enctype="multipart/form-data"
+        class="space-y-5"
+      >
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Full Name</label>
+            <input name="fullName" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="John Doe" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Phone Number</label>
+            <input name="phone" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="+91 XXXXX XXXXX" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1">Email Address</label>
+          <input name="email" type="email" required class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="john@example.com" />
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Total Experience</label>
+            <input name="totalExperience" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="e.g. 2 years" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Current Company</label>
+            <input name="currentCompany" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="Current company" />
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Current CTC</label>
+            <input name="currentCTC" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="Current salary" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Expected CTC</label>
+            <input name="expectedCTC" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="Expected salary" />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Notice Period</label>
+            <input name="noticePeriod" class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-500 focus:outline-none" placeholder="e.g. 30 days" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1">Resume (PDF only)</label>
+          <input
+            type="file"
+            name="resume"
+            accept=".pdf"
+            required
+            class="block w-full text-sm text-slate-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1">Cover Letter</label>
+          <textarea
+            name="coverLetter"
+            rows="5"
+            class="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:ring-2 focus:ring-teal-500 focus:outline-none"
+            placeholder="Tell us why you are a strong fit for this role..."
+          ></textarea>
+        </div>
+
+        <div class="pt-2 flex flex-wrap items-center gap-3">
+          <button
+            type="submit"
+            class="px-6 py-3 rounded-lg bg-teal-700 text-white font-semibold hover:bg-teal-800"
+          >
+            Submit Application
+          </button>
+          <span class="text-xs text-slate-500">Your information is used only for hiring purposes.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

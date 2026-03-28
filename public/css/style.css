@@ -700,6 +700,57 @@ input, textarea, select, button { font-family: var(--font); }
 .contact-whatsapp p { font-size: 0.87rem; color: var(--text-light); margin-bottom: 16px; }
 
 /* ══════════════════════════════════════════════════════════
+   CAREERS SECTION
+══════════════════════════════════════════════════════════ */
+.careers-section {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(230, 57, 70, 0.12), transparent 40%),
+    radial-gradient(circle at 100% 100%, rgba(42, 157, 143, 0.14), transparent 45%),
+    var(--light);
+}
+.careers-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 44px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+.careers-desc {
+  margin: 0;
+  max-width: 700px;
+}
+.careers-actions {
+  margin-top: 22px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.careers-points {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.careers-point {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-weight: 600;
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.careers-point i {
+  color: var(--primary);
+}
+
+/* ══════════════════════════════════════════════════════════
    CTA SECTION
 ══════════════════════════════════════════════════════════ */
 .cta-section {
@@ -1068,6 +1119,8 @@ input, textarea, select, button { font-family: var(--font); }
   .about-grid, .contact-main-grid, .mvv-grid, .contact-cards { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .cta-inner { flex-direction: column; text-align: center; }
+  .careers-panel { grid-template-columns: 1fr; padding: 30px 22px; }
+  .careers-actions { gap: 10px; }
   .form-row { grid-template-columns: 1fr; }
   .results-stats-inner { gap: 30px; }
   .faculty-card-big { flex-direction: column; }

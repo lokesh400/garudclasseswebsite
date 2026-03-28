@@ -20,8 +20,8 @@ router.get('/', async (req, res) => {
     ]);
     res.render('index', {
       title: 'Garud Classes Palwal — No. 1 Coaching Institute for JEE, NEET & Board Exams',
-      description: 'Garud Classes is the best coaching institute in Palwal, Haryana for JEE Main & Advanced, NEET UG, Foundation (Class 8-10), Board Exams, NTSE & Olympiads. Top-ranked institute near you in Palwal. Enroll now!',
-      keywords: 'best coaching institute in Palwal, no 1 institute in Palwal, best JEE coaching Palwal, best NEET coaching Palwal, coaching near me Palwal, top institute Palwal Haryana, JEE coaching Palwal, NEET coaching Palwal, garud classes, coaching institute Palwal, best institute near me Palwal, 11th 12th coaching Palwal, foundation classes Palwal, NTSE coaching Palwal',
+      description: 'Garud Classes is the best coaching institute in Palwal, Haryana for JEE Main & Advanced, NEET UG, Foundation (Class 8-10), Board Exams, NTSE & Olympiads. Explore admissions, courses, and careers at Garud Classes.',
+      keywords: 'best coaching institute in Palwal, no 1 institute in Palwal, best JEE coaching Palwal, best NEET coaching Palwal, coaching near me Palwal, top institute Palwal Haryana, JEE coaching Palwal, NEET coaching Palwal, garud classes, coaching institute Palwal, best institute near me Palwal, 11th 12th coaching Palwal, foundation classes Palwal, NTSE coaching Palwal, garud classes careers, garud classes recruitment, teaching jobs in palwal',
       topResults, faculties, courses, blogs, banners,
       popup: popup && popup.isActive ? popup : null,
       page: 'home'
@@ -52,6 +52,11 @@ router.get('/best-coaching-in-palwal', (req, res) => {
   });
 });
 
+// Careers shortcut
+router.get('/careers', (req, res) => {
+  res.redirect('/recruitments');
+});
+
 // Privacy Policy Page
 router.get('/privacy-policy', (req, res) => {
   res.render('privacy-policy', {
@@ -73,6 +78,8 @@ router.get('/sitemap.xml', async (req, res) => {
       { loc: siteUrl, priority: '1.0', changefreq: 'daily' },
       { loc: `${siteUrl}/best-coaching-in-palwal`, priority: '1.0', changefreq: 'weekly' },
       { loc: `${siteUrl}/about`, priority: '0.8', changefreq: 'monthly' },
+      { loc: `${siteUrl}/recruitments`, priority: '0.8', changefreq: 'daily' },
+      { loc: `${siteUrl}/careers`, priority: '0.7', changefreq: 'weekly' },
       { loc: `${siteUrl}/courses`, priority: '0.9', changefreq: 'weekly' },
       { loc: `${siteUrl}/results`, priority: '0.9', changefreq: 'weekly' },
       { loc: `${siteUrl}/faculty`, priority: '0.8', changefreq: 'monthly' },

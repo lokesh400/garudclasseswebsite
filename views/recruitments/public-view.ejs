@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= recruitment.title %> | Careers at Garud Classes</title>
+  <meta name="description" content="Apply for <%= recruitment.title %> at Garud Classes. Check eligibility, location, role details, and apply online." />
+  <meta name="keywords" content="Garud Classes jobs, <%= recruitment.title %>, careers at Garud Classes, recruitment" />
+  <link rel="canonical" href="https://www.garudclasses.com/recruitments/<%= recruitment._id %>" />
+  <meta name="robots" content="index,follow" />
+  <% 
+    const schemaSiteUrl = (typeof siteUrl !== "undefined" && siteUrl) ? siteUrl : "https://www.garudclasses.com";
+    const jobUrl = `${schemaSiteUrl}/recruitments/${recruitment._id}`;
+    const datePosted = recruitment.createdAt ? new Date(recruitment.createdAt).toISOString() : new Date().toISOString();
+    const validThrough = recruitment.lastDateToApply ? new Date(recruitment.lastDateToApply).toISOString() : undefined;
+    const schemaDescription = (recruitment.description || "").replace(/\s+/g, " ").trim();
+    const jobPostingSchema = {
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      title: recruitment.title,
+      description: schemaDescription,
+      identifier: {
+        "@type": "PropertyValue",
+        name: "Garud Classes",
+        value: String(recruitment._id),
+      },
+      datePosted,
+      validThrough,
+      employmentType: recruitment.employmentType || "FULL_TIME",
+      hiringOrganization: {
+        "@type": "Organization",
+        name: "Garud Classes",
+        sameAs: schemaSiteUrl,
+        logo: `${schemaSiteUrl}/img/logo.png`,
+      },
+      jobLocation: {
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: recruitment.location || "Palwal",
+          addressRegion: "Haryana",
+          addressCountry: "IN",
+        },
+      },
+      directApply: true,
+      url: jobUrl,
+    };
+  %>
+  <script type="application/ld+json"><%- JSON.stringify(jobPostingSchema) %></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --ink: #0f172a;
+      --primary: #0f766e;
+      --surface: #f8fafc;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(15, 118, 110, 0.15), transparent 35%),
+        radial-gradient(circle at 100% 100%, rgba(251, 191, 36, 0.16), transparent 40%),
+        var(--surface);
+      min-height: 100vh;
+    }
+
+    h1, h2 {
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .panel {
+      animation: panelIn 0.45s ease forwards;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    @keyframes panelIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="max-w-4xl mx-auto px-4 py-10">
+    <a href="/recruitments" class="inline-flex items-center gap-2 text-teal-700 text-sm font-semibold hover:underline">Back to all jobs</a>
+
+    <section class="panel bg-white rounded-2xl border border-slate-200 shadow-xl p-6 md:p-8 mt-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h1 class="text-2xl md:text-4xl font-extrabold leading-tight"><%= recruitment.title %></h1>
+        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.12em] <%= recruitment.status === 'Open' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' %>"><%= recruitment.status %></span>
+      </div>
+
+      <p class="text-slate-600 mt-4 text-sm md:text-base"><%= recruitment.department %> | <%= recruitment.location %> | <%= recruitment.employmentType || 'Full-time' %></p>
+
+      <div class="grid sm:grid-cols-2 gap-3 text-sm mt-6 text-slate-700">
+        <div class="rounded-xl bg-slate-50 border border-slate-200 p-3"><strong>Experience:</strong> <%= recruitment.experience || 'Not specified' %></div>
+        <div class="rounded-xl bg-slate-50 border border-slate-200 p-3"><strong>Salary:</strong> <%= recruitment.salaryRange || 'Not specified' %></div>
+        <div class="rounded-xl bg-slate-50 border border-slate-200 p-3"><strong>Openings:</strong> <%= recruitment.openings || 1 %></div>
+        <div class="rounded-xl bg-slate-50 border border-slate-200 p-3"><strong>Last Date:</strong> <%= recruitment.lastDateToApply ? new Date(recruitment.lastDateToApply).toLocaleDateString() : 'Not specified' %></div>
+      </div>
+
+      <h2 class="text-xl font-bold mt-8">Job Description</h2>
+      <p class="mt-3 whitespace-pre-line text-slate-700 leading-relaxed"><%= recruitment.description %></p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <% if (recruitment.jdFile) { %>
+          <a href="/<%= recruitment.jdFile %>" target="_blank" class="px-4 py-2 rounded-lg border border-slate-300 text-sm font-semibold hover:bg-slate-50">Download JD</a>
+        <% } %>
+        <% if (recruitment.status === 'Open') { %>
+          <a href="/recruitments/<%= recruitment._id %>/apply" class="px-4 py-2 rounded-lg bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">Apply Now</a>
+        <% } %>
+        <button
+          id="shareRecruitmentBtn"
+          type="button"
+          class="px-4 py-2 rounded-lg border border-slate-300 text-sm font-semibold hover:bg-slate-100"
+        >
+          Share
+        </button>
+      </div>
+      <p id="shareRecruitmentMsg" class="text-sm text-emerald-700 mt-4 hidden"></p>
+    </section>
+  </main>
+
+  <script>
+    const shareBtn = document.getElementById("shareRecruitmentBtn");
+    const shareMsg = document.getElementById("shareRecruitmentMsg");
+
+    const setShareMessage = (text, isError = false) => {
+      shareMsg.textContent = text;
+      shareMsg.classList.remove("hidden", "text-emerald-700", "text-rose-700");
+      shareMsg.classList.add(isError ? "text-rose-700" : "text-emerald-700");
+    };
+
+    shareBtn?.addEventListener("click", async () => {
+      const shareUrl = window.location.href;
+      const shareData = {
+        title: "<%= recruitment.title %> - Garud Careers",
+        text: "Check this recruitment opening at Garud Classes",
+        url: shareUrl,
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          setShareMessage("Recruitment link shared successfully.");
+          return;
+        }
+
+        await navigator.clipboard.writeText(shareUrl);
+        setShareMessage("Recruitment link copied. You can paste and share it.");
+      } catch (error) {
+        setShareMessage("Could not share automatically. Please copy the URL from the address bar.", true);
+      }
+    });
+  </script>
+</body>
+</html>

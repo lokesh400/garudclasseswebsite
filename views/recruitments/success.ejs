@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Submitted</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(16, 185, 129, 0.2), transparent 45%),
+        radial-gradient(circle at 100% 100%, rgba(14, 165, 233, 0.2), transparent 40%),
+        #f8fafc;
+    }
+
+    h1 {
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .card-in {
+      animation: cardIn 0.45s ease forwards;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    @keyframes cardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="card-in bg-white w-full max-w-xl rounded-2xl border border-slate-200 shadow-xl p-8 md:p-10 text-center">
+    <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+
+    <p class="text-xs uppercase tracking-[0.2em] font-bold text-emerald-700">Application Received</p>
+    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-2">Thank You For Applying</h1>
+
+    <p class="text-slate-700 mt-4 leading-relaxed">
+      Your application for <strong><%= recruitment.title %></strong> has been received.
+    </p>
+    <p class="text-slate-600 mt-2">Our team will review your profile and contact you if shortlisted.</p>
+
+    <div class="mt-7 flex flex-wrap justify-center gap-3">
+      <a href="/recruitments" class="px-4 py-2 rounded-lg border border-slate-300 text-sm font-semibold hover:bg-slate-50">View Other Jobs</a>
+      <a href="/recruitments/<%= recruitment._id %>" class="px-4 py-2 rounded-lg bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">Back to Job</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -88,6 +88,7 @@ app.use('/contact', require('./routes/contact'));
 app.use('/blog', require('./routes/blog'));
 app.use('/admin', require('./routes/admin'));
 app.use('/api/chat', require('./routes/chatbot'));
+app.use('/recruitments', require('./routes/recruitmentPublic'));
 
 // ─── Sitemap & Robots ──────────────────────────────────────────────────────
 app.get('/robots.txt', (req, res) => {
