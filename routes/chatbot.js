@@ -451,7 +451,7 @@ const knowledgeBase = [
       'i want to practice', 'practice online', 'online quiz',
       'attempt test', 'test portal link'
     ],
-    response: `📝 **Online Test Portal**\n\nPractice anytime, anywhere with our **Online Test Portal!**\n\n🔗 [**testportal.garudclasses.com**](https://testportal.garudclasses.com/)\n\n**Features:**\n✅ Chapter-wise tests\n✅ Subject tests (Physics, Chemistry, Biology, Maths)\n✅ Full-length mock tests (JEE Main / NEET pattern)\n✅ Previous year papers\n✅ Instant result & detailed analysis\n✅ Rank among all students\n✅ Weakness identification & recommendations\n\n**Login** with the credentials provided at the time of admission.\n\nNot enrolled yet? Call 📞 **+91 98969 13009** to join!`
+    response: `📝 **Simple Login**\n\nPractice anytime, anywhere with our **Simple Login!**\n\n🔗 [**dashboard.garudclasses.com**](https://dashboard.garudclasses.com/)\n\n**Features:**\n✅ Chapter-wise tests\n✅ Subject tests (Physics, Chemistry, Biology, Maths)\n✅ Full-length mock tests (JEE Main / NEET pattern)\n✅ Previous year papers\n✅ Instant result & detailed analysis\n✅ Rank among all students\n✅ Weakness identification & recommendations\n\n**Login** with the credentials provided at the time of admission.\n\nNot enrolled yet? Call 📞 **+91 98969 13009** to join!`
   },
 
   // ══════════════════════════════════════════════════════════════════════
@@ -1029,7 +1029,7 @@ patterns: [
       'exam',
       'quiz'
     ],
-    response: `📝 **Online Test Portal**\n\nPractice with our online test portal:\n🔗 [testportal.garudclasses.com](https://testportal.garudclasses.com/)\n\nFeatures:\n• Chapter-wise tests\n• Full mock tests for JEE & NEET\n• Instant result & analysis\n\nLogin with your credentials to start practising!`
+    response: `📝 **Simple Login**\n\nPractice with our online test portal:\n🔗 [dashboard.garudclasses.com](https://dashboard.garudclasses.com/)\n\nFeatures:\n• Chapter-wise tests\n• Full mock tests for JEE & NEET\n• Instant result & analysis\n\nLogin with your credentials to start practising!`
   },
 
   // Store
