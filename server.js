@@ -13,7 +13,7 @@ const http = require('http');
 const https = require('https');
 const Admin = require('./models/Admin');
 const cors = require('cors');
-const axios = require('axios');
+const axios = require('axios')
 
 const app = express();
 
