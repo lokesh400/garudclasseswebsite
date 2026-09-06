@@ -80,6 +80,7 @@ app.use(async (req, res, next) => {
 
 // ─── Routes ────────────────────────────────────────────────────────────────
 app.use('/', require('./routes/main'));
+app.use('/', require('./routes/seo'));
 app.use('/results', require('./routes/results'));
 app.use('/faculty', require('./routes/faculty'));
 app.use('/courses', require('./routes/courses'));

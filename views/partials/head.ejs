@@ -6,18 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
   <!-- ── SEO Meta Tags ── -->
-  <title><%= locals.title || 'Garud Classes - Excellence in Education' %></title>
-  <meta name="description" content="<%= locals.description || 'Garud Classes - Premier coaching for JEE, NEET, Board Exams, NTSE and Olympiads.' %>">
-  <meta name="keywords" content="<%= locals.keywords || 'coaching institute, JEE, NEET, board exams, Garud Classes' %>">
+  <title><%= locals.title || 'Garud Classes - Best Coaching in Palwal & Faridabad' %></title>
+  <meta name="description" content="<%= locals.description || 'Garud Classes is the premier coaching institute in Palwal & Faridabad for JEE Main, NEET UG, NDA, Foundation and Board Exams. Top ranks and expert faculty.' %>">
+  <meta name="keywords" content="<%= locals.keywords || 'best coaching institute in palwal, best coaching institute in faridabad, JEE coaching palwal, NEET coaching faridabad, NDA coaching palwal, best NDA coaching faridabad, board exams coaching, Garud Classes' %>">
   <meta name="author" content="Garud Classes">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="<%= siteUrl %><%= locals.currentPath || '' %>">
 
   <!-- ── Open Graph ── -->
-  <meta property="og:title" content="<%= locals.title || 'Garud Classes' %>">
-  <meta property="og:description" content="<%= locals.description || 'Garud Classes - Premier coaching institute.' %>">
+  <meta property="og:title" content="<%= locals.title || 'Garud Classes - No. 1 Coaching Institute' %>">
+  <meta property="og:description" content="<%= locals.description || 'Join Garud Classes for top-tier coaching in JEE, NEET, NDA, and Foundation across Palwal and Faridabad.' %>">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="<%= siteUrl %>">
+  <meta property="og:url" content="<%= siteUrl %><%= locals.currentPath || '' %>">
   <meta property="og:image" content="<%= siteUrl %>/img/og-image.jpg">
   <meta property="og:site_name" content="Garud Classes">
   <meta property="og:locale" content="en_IN">
@@ -25,7 +25,7 @@
   <!-- ── Twitter Card ── -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<%= locals.title || 'Garud Classes' %>">
-  <meta name="twitter:description" content="<%= locals.description || 'Premier coaching institute for JEE, NEET and Board Exams.' %>">
+  <meta name="twitter:description" content="<%= locals.description || 'Premier coaching institute for JEE, NEET, NDA and Board Exams in Palwal & Faridabad.' %>">
   <meta name="twitter:image" content="<%= siteUrl %>/img/og-image.jpg">
 
   <!-- ── Favicon ── -->
@@ -44,9 +44,9 @@
   <!-- ── Styles ── -->
   <link rel="stylesheet" href="/css/style.css">
 
-  <!-- ── Geo Meta (Palwal, Haryana) ── -->
+  <!-- ── Geo Meta (Palwal & Faridabad, Haryana) ── -->
   <meta name="geo.region" content="IN-HR">
-  <meta name="geo.placename" content="Palwal, Haryana, India">
+  <meta name="geo.placename" content="Palwal, Faridabad, Haryana, India">
   <meta name="geo.position" content="28.1522;77.3219">
   <meta name="ICBM" content="28.1522, 77.3219">
 
@@ -56,19 +56,21 @@
     "@context": "https://schema.org",
     "@type": ["EducationalOrganization", "LocalBusiness"],
     "name": "Garud Classes",
-    "alternateName": ["Garud Classes Palwal", "Best Coaching Institute Palwal"],
+    "alternateName": ["Garud Classes Palwal", "Garud Classes Faridabad", "Best Coaching Institute Palwal", "Best JEE NEET Coaching Faridabad"],
     "url": "<%= siteUrl %>",
     "logo": "<%= siteUrl %>/img/logo.png",
     "image": "<%= siteUrl %>/img/og-image.jpg",
-    "description": "Garud Classes is the No. 1 coaching institute in Palwal, Haryana offering expert coaching for JEE Main & Advanced, NEET UG, Foundation, Board Exams, NTSE and Olympiads.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Palwal",
-      "addressLocality": "Palwal",
-      "addressRegion": "Haryana",
-      "postalCode": "121102",
-      "addressCountry": "IN"
-    },
+    "description": "Garud Classes is the No. 1 coaching institute in Palwal and Faridabad, Haryana offering expert coaching for JEE Main & Advanced, NEET UG, NDA, Foundation, Board Exams, NTSE and Olympiads.",
+    "address": [
+      {
+        "@type": "PostalAddress",
+        "streetAddress": "Palwal",
+        "addressLocality": "Palwal",
+        "addressRegion": "Haryana",
+        "postalCode": "121102",
+        "addressCountry": "IN"
+      }
+    ],
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": 28.1522,
@@ -78,16 +80,17 @@
     "email": "info@garudclasses.com",
     "priceRange": "₹₹",
     "openingHours": "Mo-Sa 07:00-20:00",
-    "areaServed": ["Palwal", "Faridabad", "Ballabhgarh", "Hodal", "Hathin", "Haryana", "NCR"],
+    "areaServed": ["Palwal", "Faridabad", "Ballabhgarh", "Hodal", "Hathin", "Delhi NCR", "Haryana"],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Coaching Programs",
       "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "JEE Main & Advanced Coaching Palwal" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "NEET UG Coaching Palwal" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "JEE Main & Advanced Coaching Palwal & Faridabad" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "NEET UG Coaching Palwal & Faridabad" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "NDA Coaching Palwal & Faridabad" } },
         { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "Foundation Coaching Class 8-10 Palwal" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "Board Exam Coaching 11th 12th Palwal" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "NTSE Coaching Palwal" } }
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "Board Exam Coaching 11th 12th Faridabad" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Course", "name": "NTSE Coaching" } }
       ]
     },
     "sameAs": [

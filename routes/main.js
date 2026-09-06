@@ -20,8 +20,8 @@ router.get('/', async (req, res) => {
     ]);
     res.render('index', {
       title: 'Garud Classes Palwal — No. 1 Coaching Institute for JEE, NEET & Board Exams',
-      description: 'Garud Classes is the best coaching institute in Palwal, Haryana for JEE Main & Advanced, NEET UG, Foundation (Class 8-10), Board Exams, NTSE & Olympiads. Explore admissions, courses, and careers at Garud Classes.',
-      keywords: 'best coaching institute in Palwal, no 1 institute in Palwal, best JEE coaching Palwal, best NEET coaching Palwal, coaching near me Palwal, top institute Palwal Haryana, JEE coaching Palwal, NEET coaching Palwal, garud classes, coaching institute Palwal, best institute near me Palwal, 11th 12th coaching Palwal, foundation classes Palwal, NTSE coaching Palwal, garud classes careers, garud classes recruitment, teaching jobs in palwal',
+      description: 'Garud Classes is the best coaching institute in Palwal and Faridabad for JEE Main & Advanced, NEET UG, NDA, Foundation (Class 8-10), Board Exams, NTSE & Olympiads. Explore admissions, courses, and careers at Garud Classes.',
+      keywords: 'best coaching institute in Palwal, best coaching institute in Faridabad, no 1 institute in Palwal, best JEE coaching Palwal, best NEET coaching Faridabad, NDA coaching Palwal Faridabad, top institute Haryana NCR, JEE coaching Palwal, NEET coaching Palwal, garud classes, coaching institute Faridabad, best institute near me Palwal, 11th 12th coaching, foundation classes, NTSE coaching, garud classes careers',
       topResults, faculties, courses, blogs, banners,
       popup: popup && popup.isActive ? popup : null,
       page: 'home'
@@ -36,8 +36,8 @@ router.get('/', async (req, res) => {
 router.get('/about', (req, res) => {
   res.render('about', {
     title: 'About Garud Classes Palwal — Best Coaching Institute in Palwal Haryana',
-    description: 'Learn about Garud Classes — the No. 1 coaching institute in Palwal, Haryana. Our mission, faculty, infrastructure, and track record of success in JEE, NEET and Board Exams since our founding.',
-    keywords: 'about garud classes, best institute Palwal, coaching institute Palwal about, garud classes Palwal history, No 1 institute Palwal',
+    description: 'Learn about Garud Classes — the No. 1 coaching institute in Palwal and Faridabad. Our mission, expert faculty, infrastructure, and track record of success in JEE, NEET, NDA and Board Exams since our founding.',
+    keywords: 'about garud classes, best institute Palwal, best institute Faridabad, coaching institute Faridabad about, garud classes history, No 1 institute NCR',
     page: 'about'
   });
 });
@@ -77,6 +77,8 @@ router.get('/sitemap.xml', async (req, res) => {
     let urls = [
       { loc: siteUrl, priority: '1.0', changefreq: 'daily' },
       { loc: `${siteUrl}/best-coaching-in-palwal`, priority: '1.0', changefreq: 'weekly' },
+      { loc: `${siteUrl}/faridabad-coaching`, priority: '1.0', changefreq: 'weekly' },
+      { loc: `${siteUrl}/nda-coaching`, priority: '1.0', changefreq: 'weekly' },
       { loc: `${siteUrl}/about`, priority: '0.8', changefreq: 'monthly' },
       { loc: `${siteUrl}/recruitments`, priority: '0.8', changefreq: 'daily' },
       { loc: `${siteUrl}/careers`, priority: '0.7', changefreq: 'weekly' },
